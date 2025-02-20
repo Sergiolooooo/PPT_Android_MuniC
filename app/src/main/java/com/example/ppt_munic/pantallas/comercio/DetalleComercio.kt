@@ -1,4 +1,4 @@
-package com.example.ppt_munic.pantallas
+package com.example.ppt_munic.pantallas.comercio
 
 import android.os.Bundle
 import android.widget.TextView

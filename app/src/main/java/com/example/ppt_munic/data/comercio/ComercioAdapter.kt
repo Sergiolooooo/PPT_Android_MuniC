@@ -1,4 +1,4 @@
-package com.example.ppt_munic.data
+package com.example.ppt_munic.data.comercio
 
 import android.content.Intent
 import android.view.LayoutInflater
@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ppt_munic.R
-import com.example.ppt_munic.pantallas.DetalleComercio
+import com.example.ppt_munic.pantallas.comercio.DetalleComercio
 
 
 class ComercioAdapter(private val comercios: List<Comercio>) :

@@ -1,4 +1,4 @@
-package com.example.ppt_munic.data
+package com.example.ppt_munic.data.comercio
 
 import com.google.gson.annotations.SerializedName
 
