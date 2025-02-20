@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Theme.PPT_MuniC" parent="android:Theme.Material.Light.NoActionBar" />
+    <style name="Theme.PPT_MuniC" parent="Theme.MaterialComponents.Light.NoActionBar" />
+
 </resources>
