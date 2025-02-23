@@ -25,12 +25,12 @@ class CategoriaAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val categoria = categorias[position]
-        holder.tvCategoria.text = categoria.nombre_categoria
+        holder.tvCategoria.text = categoria.nombre
 
         holder.itemView.setOnClickListener {
             // Al hacer click, lanzamos la pantalla de comercios filtrados por categoría.
             val intent = Intent(holder.itemView.context, ComerciosActivity::class.java).apply {
-                putExtra("categoria", categoria.nombre_categoria)
+                putExtra("categoria", categoria.nombre)
             }
             holder.itemView.context.startActivity(intent)
         }

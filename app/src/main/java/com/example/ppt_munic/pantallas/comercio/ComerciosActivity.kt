@@ -35,20 +35,26 @@ class ComerciosActivity : AppCompatActivity() {
     }
 
     private fun cargarComerciosPorCategoria(categoria: String) {
-        // Pasa la categoría al endpoint
+        Log.d("DEBUG", "Cargando comercios para la categoría: $categoria") // Verifica qué se está enviando
+
         RetrofitClient.api.getComerciosByCategoria(categoria).enqueue(object : Callback<ComercioRespuesta> {
             override fun onResponse(call: Call<ComercioRespuesta>, response: Response<ComercioRespuesta>) {
                 if (response.isSuccessful) {
                     val comercioResponse = response.body()
-                    comercioAdapter = ComercioAdapter(comercioResponse?.data ?: emptyList())
-                    recyclerView.adapter = comercioAdapter
+                    if (comercioResponse != null) {
+                        Log.d("API_SUCCESS", "Comercios recibidos: ${comercioResponse.data}")
+                        comercioAdapter = ComercioAdapter(comercioResponse.data)
+                        recyclerView.adapter = comercioAdapter
+                    } else {
+                        Log.e("API_ERROR", "Respuesta vacía")
+                    }
                 } else {
-                    Log.e("API_ERROR", "Respuesta no exitosa")
+                    Log.e("API_ERROR", "Código de error: ${response.code()}, mensaje: ${response.errorBody()?.string()}")
                 }
             }
 
             override fun onFailure(call: Call<ComercioRespuesta>, t: Throwable) {
-                Log.e("API_ERROR", "Error: ${t.message}")
+                Log.e("API_ERROR", "Fallo en la llamada: ${t.message}")
             }
         })
     }

@@ -7,10 +7,12 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface ApiService {
-    @GET("categoriascomercios/")
+    @GET("api/categoriascomercios") // RUTA CORRECTA: SIN "/" AL INICIO
     fun getCategorias(): Call<CategoriaRespuesta>
 
-    @GET("comercios/categoria")
-    fun getComerciosByCategoria(@Query("categoria") categoria: String): Call<ComercioRespuesta>
+    @GET("api/comercios") // RUTA CORRECTA: SIN "/" AL INICIO
+    fun getComercios(): Call<ComercioRespuesta>
 
+    @GET("api/comercios/categoria") // RUTA CORRECTA PARA FILTRAR POR CATEGORÍA
+    fun getComerciosByCategoria(@Query("categoria") categoria: String): Call<ComercioRespuesta>
 }

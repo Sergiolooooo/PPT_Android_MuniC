@@ -1,6 +1,8 @@
 package com.example.ppt_munic.data.categoria
 
+import com.google.gson.annotations.SerializedName
+
 data class Categoria(
-    val id_categoria: Int,
-    val nombre_categoria: String
+    @SerializedName("id_categoria") val id: Int,
+    @SerializedName("nombre_categoria") val nombre: String
 )

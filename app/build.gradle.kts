@@ -63,5 +63,6 @@ dependencies {
     implementation(libs.retrofit)
     implementation(libs.retrofit.gson)
     implementation(libs.material)
-
+    implementation(libs.okhttp)
+    implementation(libs.okhttp.logging) // Aquí se incluye el interceptor de logs
 }
