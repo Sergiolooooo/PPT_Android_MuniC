@@ -4,17 +4,19 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ppt_munic.R
 import com.example.ppt_munic.pantallas.comercio.ComerciosActivity
 
 class CategoriaAdapter(
-    private val categorias: List<Categoria>
+    private var categorias: List<Categoria>
 ) : RecyclerView.Adapter<CategoriaAdapter.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val tvCategoria: TextView = view.findViewById(R.id.tvCategoria)
+        val iconoCategoria: ImageView = view.findViewById(R.id.iconoCategoria)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -27,8 +29,21 @@ class CategoriaAdapter(
         val categoria = categorias[position]
         holder.tvCategoria.text = categoria.nombre
 
+        // Convertir a mayúsculas para evitar errores de comparación
+        when (categoria.nombre.uppercase()) {
+            "DEPORTES" -> holder.iconoCategoria.setImageResource(R.drawable.ic_comercio)
+            "FRUTAS" -> holder.iconoCategoria.setImageResource(R.drawable.ic_sol)
+            "VERDURAS" -> holder.iconoCategoria.setImageResource(R.drawable.ic_comercio)
+            else -> holder.iconoCategoria.setImageResource(R.drawable.ic_default)
+        }
+
+        // Asegurar tamaño y escalado correcto del icono
+        holder.iconoCategoria.layoutParams.width = 200
+        holder.iconoCategoria.layoutParams.height = 200
+        holder.iconoCategoria.scaleType = ImageView.ScaleType.FIT_CENTER
+
+        // Agregar listener de clic para abrir comercios filtrados por categoría
         holder.itemView.setOnClickListener {
-            // Al hacer click, lanzamos la pantalla de comercios filtrados por categoría.
             val intent = Intent(holder.itemView.context, ComerciosActivity::class.java).apply {
                 putExtra("categoria", categoria.nombre)
             }
@@ -36,5 +51,11 @@ class CategoriaAdapter(
         }
     }
 
+
     override fun getItemCount() = categorias.size
+
+    fun actualizarLista(nuevaLista: List<Categoria>) {
+        categorias = nuevaLista
+        notifyDataSetChanged()
+    }
 }
