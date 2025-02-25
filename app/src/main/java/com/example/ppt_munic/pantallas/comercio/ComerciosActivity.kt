@@ -20,46 +20,28 @@ class ComerciosActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_comercios) // Layout para esta Activity
+        setContentView(R.layout.activity_comercios)
 
-        recyclerView = findViewById(R.id.recyclerView)
+        recyclerView = findViewById(R.id.recyclerViewComercios)
         recyclerView.layoutManager = LinearLayoutManager(this)
 
-        // Recibir el extra "categoria" enviado por CategoriasActivity
-        val categoria = intent.getStringExtra("categoria")
-        if (categoria != null) {
-            cargarComerciosPorCategoria(categoria)
-        } else {
-            cargarTodosLosComercios()
-        }
+        val categoria = intent.getStringExtra("categoria") ?: ""
+        obtenerComerciosPorCategoria(categoria)
     }
 
-    private fun cargarComerciosPorCategoria(categoria: String) {
-        Log.d("DEBUG", "Cargando comercios para la categoría: $categoria") // Verifica qué se está enviando
-
+    private fun obtenerComerciosPorCategoria(categoria: String) {
         RetrofitClient.api.getComerciosByCategoria(categoria).enqueue(object : Callback<ComercioRespuesta> {
             override fun onResponse(call: Call<ComercioRespuesta>, response: Response<ComercioRespuesta>) {
                 if (response.isSuccessful) {
-                    val comercioResponse = response.body()
-                    if (comercioResponse != null) {
-                        Log.d("API_SUCCESS", "Comercios recibidos: ${comercioResponse.data}")
-                        comercioAdapter = ComercioAdapter(comercioResponse.data)
-                        recyclerView.adapter = comercioAdapter
-                    } else {
-                        Log.e("API_ERROR", "Respuesta vacía")
-                    }
-                } else {
-                    Log.e("API_ERROR", "Código de error: ${response.code()}, mensaje: ${response.errorBody()?.string()}")
+                    val comercios = response.body()?.data ?: emptyList()
+                    comercioAdapter = ComercioAdapter(comercios)
+                    recyclerView.adapter = comercioAdapter
                 }
             }
 
             override fun onFailure(call: Call<ComercioRespuesta>, t: Throwable) {
-                Log.e("API_ERROR", "Fallo en la llamada: ${t.message}")
+                Log.e("API_ERROR", "Error en la llamada: ${t.message}")
             }
         })
-    }
-
-    private fun cargarTodosLosComercios() {
-        // Implementa la llamada al endpoint que trae todos los comercios si se desea
     }
 }

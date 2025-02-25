@@ -1,37 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="12dp"
-    android:background="?attr/selectableItemBackground"
-    android:clickable="true"
-    android:focusable="true">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="10dp">
 
-    <TextView
-        android:id="@+id/tvNombre"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:textColor="@android:color/black"
+    <!-- Imagen del comercio -->
+    <ImageView
+        android:id="@+id/imgComercio"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:src="@drawable/ic_default"
+        android:scaleType="fitCenter"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/tvDescripcion"
-        app:layout_constraintHorizontal_bias="0" />
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
+
+    <!-- Nombre del comercio -->
     <TextView
-        android:id="@+id/tvDescripcion"
-        android:layout_width="0dp"
+        android:id="@+id/tvNombreComercio"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="14sp"
-        android:textColor="@android:color/darker_gray"
-        app:layout_constraintTop_toBottomOf="@id/tvNombre"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0" />
+        android:text="Nombre del comercio"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:textColor="@color/marron_texto"
+        app:layout_constraintStart_toEndOf="@id/imgComercio"
+        app:layout_constraintTop_toTopOf="@id/imgComercio"
+        android:layout_marginStart="10dp"/>
 
+    <!-- Teléfono del comercio -->
+    <TextView
+        android:id="@+id/tvTelefonoComercio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="88888888"
+        android:textSize="14sp"
+        android:textColor="@color/marron_texto"
+        app:layout_constraintStart_toEndOf="@id/imgComercio"
+        app:layout_constraintTop_toBottomOf="@id/tvNombreComercio"
+        android:layout_marginStart="10dp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
