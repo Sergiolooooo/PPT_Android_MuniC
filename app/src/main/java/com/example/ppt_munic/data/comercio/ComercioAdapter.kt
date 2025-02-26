@@ -1,6 +1,7 @@
 package com.example.ppt_munic.data.comercio
 
 import android.content.Intent
+import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,8 +11,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.ppt_munic.R
 import com.example.ppt_munic.pantallas.comercio.DetalleComercio
 
-class ComercioAdapter(private val comercios: List<Comercio>) :
-    RecyclerView.Adapter<ComercioAdapter.ViewHolder>() {
+class ComercioAdapter(
+    private val comercios: List<Comercio>,
+    private val iconoCategoria: Drawable
+) : RecyclerView.Adapter<ComercioAdapter.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val imgComercio: ImageView = view.findViewById(R.id.imgComercio)
@@ -30,10 +33,9 @@ class ComercioAdapter(private val comercios: List<Comercio>) :
         holder.tvNombre.text = comercio.nombre
         holder.tvTelefono.text = comercio.telefono.toString()
 
-        // Usar ic_default como imagen predeterminada
-        holder.imgComercio.setImageResource(R.drawable.ic_default)
+        // Asignar el icono de la categoría
+        holder.imgComercio.setImageDrawable(iconoCategoria)
 
-        // Manejo de clic para abrir la pantalla de detalles
         holder.itemView.setOnClickListener {
             val intent = Intent(holder.itemView.context, DetalleComercio::class.java).apply {
                 putExtra("nombre", comercio.nombre)

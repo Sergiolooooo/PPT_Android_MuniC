@@ -1,7 +1,9 @@
 package com.example.ppt_munic.pantallas.comercio
 
+import android.content.Intent
 import android.os.Bundle
-import android.util.Log
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -17,6 +19,9 @@ class ComerciosActivity : AppCompatActivity() {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var comercioAdapter: ComercioAdapter
+    private lateinit var iconoCategoria: ImageView
+    private lateinit var tituloCategoria: TextView
+    private lateinit var btnCerrar: ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,7 +30,26 @@ class ComerciosActivity : AppCompatActivity() {
         recyclerView = findViewById(R.id.recyclerViewComercios)
         recyclerView.layoutManager = LinearLayoutManager(this)
 
+        iconoCategoria = findViewById(R.id.iconoCategoria)
+        tituloCategoria = findViewById(R.id.titulo_categoria)
+        btnCerrar = findViewById(R.id.btn_cerrar)
+
         val categoria = intent.getStringExtra("categoria") ?: ""
+
+        // Mostrar el icono correcto de la categoría
+        when (categoria) {
+            "DEPORTES" -> iconoCategoria.setImageResource(R.drawable.ic_comercio)
+            "FRUTAS" -> iconoCategoria.setImageResource(R.drawable.ic_sol)
+            "VERDURAS" -> iconoCategoria.setImageResource(R.drawable.ic_comercio)
+            else -> iconoCategoria.setImageResource(R.drawable.ic_default)
+        }
+
+        tituloCategoria.text = categoria
+
+        btnCerrar.setOnClickListener {
+            finish() // Cierra la actividad
+        }
+
         obtenerComerciosPorCategoria(categoria)
     }
 
@@ -34,13 +58,13 @@ class ComerciosActivity : AppCompatActivity() {
             override fun onResponse(call: Call<ComercioRespuesta>, response: Response<ComercioRespuesta>) {
                 if (response.isSuccessful) {
                     val comercios = response.body()?.data ?: emptyList()
-                    comercioAdapter = ComercioAdapter(comercios)
+                    comercioAdapter = ComercioAdapter(comercios, iconoCategoria.drawable)
                     recyclerView.adapter = comercioAdapter
                 }
             }
 
             override fun onFailure(call: Call<ComercioRespuesta>, t: Throwable) {
-                Log.e("API_ERROR", "Error en la llamada: ${t.message}")
+                // Manejar error
             }
         })
     }
