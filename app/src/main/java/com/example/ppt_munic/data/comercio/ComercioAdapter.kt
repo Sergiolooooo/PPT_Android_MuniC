@@ -43,7 +43,7 @@ class ComercioAdapter(
                 putExtra("latitud", comercio.latitud)
                 putExtra("longitud", comercio.longitud)
                 putExtra("telefono", comercio.telefono)
-                putExtra("categoria", comercio.categoria)
+                putExtra("video_youtube", comercio.videoYoutube) // Agregar video
             }
             holder.itemView.context.startActivity(intent)
         }

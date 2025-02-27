@@ -1,7 +1,7 @@
 package com.example.ppt_munic.pantallas.comercio
 
-import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -9,11 +9,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ppt_munic.R
 import com.example.ppt_munic.data.comercio.ComercioAdapter
-import com.example.ppt_munic.data.comercio.ComercioRespuesta
 import com.example.ppt_munic.network.RetrofitClient
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class ComerciosActivity : AppCompatActivity() {
 
@@ -54,18 +54,21 @@ class ComerciosActivity : AppCompatActivity() {
     }
 
     private fun obtenerComerciosPorCategoria(categoria: String) {
-        RetrofitClient.api.getComerciosByCategoria(categoria).enqueue(object : Callback<ComercioRespuesta> {
-            override fun onResponse(call: Call<ComercioRespuesta>, response: Response<ComercioRespuesta>) {
+        lifecycleScope.launch(Dispatchers.IO) {  // Ejecuta en un hilo de fondo
+            try {
+                val response = RetrofitClient.api.getComerciosByCategoria(categoria).execute()
                 if (response.isSuccessful) {
                     val comercios = response.body()?.data ?: emptyList()
-                    comercioAdapter = ComercioAdapter(comercios, iconoCategoria.drawable)
-                    recyclerView.adapter = comercioAdapter
+                    withContext(Dispatchers.Main) {  // Actualiza la UI en el hilo principal
+                        comercioAdapter = ComercioAdapter(comercios, iconoCategoria.drawable)
+                        recyclerView.adapter = comercioAdapter
+                    }
+                }
+            } catch (e: Exception) {
+                withContext(Dispatchers.Main) {
+                    Log.e("API_ERROR", "Error en la llamada: ${e.message}")
                 }
             }
-
-            override fun onFailure(call: Call<ComercioRespuesta>, t: Throwable) {
-                // Manejar error
-            }
-        })
+        }
     }
 }

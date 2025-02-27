@@ -1,82 +1,126 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:padding="16dp"
-    android:background="@color/blanco">
+    android:background="@color/verde_fondo">
 
-    <!-- Imagen del comercio -->
-    <ImageView
-        android:id="@+id/imgComercioDetalle"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:src="@drawable/ic_default"
-        android:scaleType="fitCenter"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
-
-
-    <!-- Nombre del comercio -->
-    <TextView
-        android:id="@+id/tvNombre"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Nombre del comercio"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:textColor="@color/marron_texto"
-        app:layout_constraintTop_toBottomOf="@id/imgComercioDetalle"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="10dp"/>
-
-    <!-- Descripción -->
-    <TextView
-        android:id="@+id/tvDescripcion"
+    <!-- Contenedor superior con fondo blanco -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/contenedorSuperior"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Descripción del comercio"
-        android:textSize="16sp"
-        android:textColor="@color/marron_texto"
-        app:layout_constraintTop_toBottomOf="@id/tvNombre"
-        android:layout_marginTop="10dp"/>
+        android:layout_height="150dp"
+        android:background="@color/blanco"
+        app:layout_constraintTop_toTopOf="parent">
 
-    <!-- Latitud -->
-    <TextView
-        android:id="@+id/tvLatitud"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Latitud: "
-        android:textSize="16sp"
-        android:textColor="@color/marron_texto"
-        app:layout_constraintTop_toBottomOf="@id/tvDescripcion"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="10dp"/>
+        <!-- Botón de menú -->
+        <ImageView
+            android:id="@+id/menu_icon"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@drawable/ic_menu"
+            app:tint="@color/marron_texto"
+            android:layout_margin="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Longitud -->
-    <TextView
-        android:id="@+id/tvLongitud"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Longitud: "
-        android:textSize="16sp"
-        android:textColor="@color/marron_texto"
-        app:layout_constraintTop_toBottomOf="@id/tvLatitud"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="5dp"/>
+        <!-- Botón de cerrar -->
+        <ImageView
+            android:id="@+id/btn_cerrar"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@drawable/ic_close"
+            app:tint="@color/marron_texto"
+            android:layout_margin="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Teléfono -->
-    <TextView
-        android:id="@+id/tvTelefono"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Teléfono: "
-        android:textSize="16sp"
-        android:textColor="@color/marron_texto"
-        app:layout_constraintTop_toBottomOf="@id/tvLongitud"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="5dp"/>
+        <!-- Icono del comercio (sin background para permitir que se vea bien) -->
+        <ImageView
+            android:id="@+id/iconoComercio"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:padding="10dp"
+            android:elevation="8dp"
+            app:layout_constraintTop_toBottomOf="@id/menu_icon"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- Sección verde con esquinas redondeadas -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/contenedorVerde"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@drawable/bg_redondeado_abajo"
+        app:layout_constraintTop_toBottomOf="@id/contenedorSuperior"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <!-- Nombre del comercio -->
+        <TextView
+            android:id="@+id/tvNombre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nombre del Comercio"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:textColor="@color/blanco"
+            app:layout_constraintTop_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="16dp" />
+
+        <!-- Descripción -->
+        <TextView
+            android:id="@+id/tvDescripcion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Descripción del comercio"
+            android:textSize="16sp"
+            android:textColor="@color/blanco"
+            app:layout_constraintTop_toBottomOf="@id/tvNombre"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="4dp" />
+
+        <!-- Mapa redondeado -->
+        <com.google.android.gms.maps.MapView
+            android:id="@+id/mapView"
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            android:background="@drawable/bg_categoria"
+            app:layout_constraintTop_toBottomOf="@id/tvDescripcion"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="16dp" />
+
+        <!-- Video de YouTube con margen adecuado -->
+        <WebView
+            android:id="@+id/webViewVideo"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            app:layout_constraintTop_toBottomOf="@id/mapView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="25dp" />
+
+        <!-- Teléfono con mejor espaciado -->
+        <TextView
+            android:id="@+id/tvTelefono"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Teléfono: 00000000"
+            android:textSize="16sp"
+            android:textColor="@color/blanco"
+            app:layout_constraintTop_toBottomOf="@id/webViewVideo"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="24dp" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
