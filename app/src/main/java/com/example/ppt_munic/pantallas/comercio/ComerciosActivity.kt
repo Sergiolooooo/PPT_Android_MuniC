@@ -39,8 +39,8 @@ class ComerciosActivity : AppCompatActivity() {
         // Mostrar el icono correcto de la categoría
         when (categoria) {
             "DEPORTES" -> iconoCategoria.setImageResource(R.drawable.ic_comercio)
-            "FRUTAS" -> iconoCategoria.setImageResource(R.drawable.ic_sol)
-            "VERDURAS" -> iconoCategoria.setImageResource(R.drawable.ic_comercio)
+            "HOTELES" -> iconoCategoria.setImageResource(R.drawable.ic_hoteles)
+            "COMIDAS" -> iconoCategoria.setImageResource(R.drawable.ic_sol)
             else -> iconoCategoria.setImageResource(R.drawable.ic_default)
         }
 

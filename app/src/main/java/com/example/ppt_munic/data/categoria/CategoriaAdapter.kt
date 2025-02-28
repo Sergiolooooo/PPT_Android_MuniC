@@ -32,8 +32,8 @@ class CategoriaAdapter(
         // Convertir a mayúsculas para evitar errores de comparación
         when (categoria.nombre.uppercase()) {
             "DEPORTES" -> holder.iconoCategoria.setImageResource(R.drawable.ic_comercio)
-            "FRUTAS" -> holder.iconoCategoria.setImageResource(R.drawable.ic_sol)
-            "VERDURAS" -> holder.iconoCategoria.setImageResource(R.drawable.ic_comercio)
+            "HOTELES" -> holder.iconoCategoria.setImageResource(R.drawable.ic_hoteles)
+            "COMIDAS" -> holder.iconoCategoria.setImageResource(R.drawable.ic_sol)
             else -> holder.iconoCategoria.setImageResource(R.drawable.ic_default)
         }
 
