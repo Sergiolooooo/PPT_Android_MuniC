@@ -68,5 +68,6 @@ dependencies {
     implementation(libs.okhttp)
     implementation(libs.okhttp.logging) // Aquí se incluye el interceptor de logs
     implementation(libs.glide)
-    kapt(libs.glideCompiler) // Importante: usar paréntesis `kapt()`
+    kapt(libs.glide.compiler)
+    annotationProcessor(libs.glide.compiler)
 }

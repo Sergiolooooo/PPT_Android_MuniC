@@ -1,12 +1,13 @@
 package com.example.ppt_munic.pantallas.comercio
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
-import android.webkit.WebView
-import android.webkit.WebViewClient
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import com.bumptech.glide.Glide
 import com.example.ppt_munic.R
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -21,80 +22,90 @@ class DetalleComercio : AppCompatActivity(), OnMapReadyCallback {
 
     private lateinit var mapView: MapView
     private var googleMap: GoogleMap? = null
+    private lateinit var btnCerrar: ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detalle_comercio)
 
-        // Asignar vistas
         val iconoComercio: ImageView = findViewById(R.id.iconoComercio)
         val tvNombre: TextView = findViewById(R.id.tvNombre)
         val tvDescripcion: TextView = findViewById(R.id.tvDescripcion)
         val tvTelefono: TextView = findViewById(R.id.tvTelefono)
-        val webView: WebView = findViewById(R.id.webViewVideo)
+        val tvVideoYoutube: TextView = findViewById(R.id.tvVideoYoutube) // Nuevo texto para el video
+        val thumbnailYouTube: ImageView = findViewById(R.id.thumbnailYouTube)
         mapView = findViewById(R.id.mapView)
+        btnCerrar = findViewById(R.id.btn_cerrar)
 
-        // Recibir los datos del intent
         val nombre = intent.getStringExtra("nombre") ?: "Sin nombre"
         val descripcion = intent.getStringExtra("descripcion") ?: "Sin descripción"
-        val telefono = intent.getIntExtra("telefono", 0).toString()
+        val telefono = intent.getStringExtra("telefono")
         val videoUrl = intent.getStringExtra("video_youtube")
+        val iconoRes = intent.getIntExtra("iconoCategoria", R.drawable.ic_default)
 
-        // Intentar obtener latitud y longitud, si no existen, usar coordenadas por defecto
-        val latitud = intent.getStringExtra("latitud")?.toDoubleOrNull() ?: 10.426869410231593
-        val longitud = intent.getStringExtra("longitud")?.toDoubleOrNull() ?: -85.09165648252866
-
-        // Asignar valores
+        // Asignar valores a los TextView
         tvNombre.text = nombre
         tvDescripcion.text = descripcion
-        tvTelefono.text = "Teléfono: $telefono"
+        tvTelefono.text = if (!telefono.isNullOrEmpty() && telefono != "null") "Teléfono: $telefono" else "Teléfono: No disponible"
+        tvVideoYoutube.text = "Video de YouTube" // Agregamos el texto sobre la miniatura
 
-        // Inicializar MapView en un hilo separado
+        // Cargar icono de la categoría seleccionado
+        Glide.with(this)
+            .load(iconoRes)
+            .placeholder(R.drawable.ic_default)
+            .into(iconoComercio)
+
+        // Inicializar el mapa de manera asíncrona
         lifecycleScope.launch(Dispatchers.Main) {
             mapView.onCreate(savedInstanceState)
             mapView.getMapAsync(this@DetalleComercio)
         }
 
-        // Configuración para evitar que WebView acceda a la cámara
-        webView.settings.allowFileAccess = true
-        webView.settings.allowContentAccess = true
-        webView.settings.mediaPlaybackRequiresUserGesture = false
-
-        // Cargar el video si la URL es válida
+        // Cargar miniatura de YouTube
         if (!videoUrl.isNullOrEmpty() && videoUrl.contains("youtube.com")) {
-            webView.settings.javaScriptEnabled = true
-            webView.webViewClient = WebViewClient()
-            webView.loadUrl(videoUrl)
-            webView.visibility = WebView.VISIBLE
+            val videoId = getYouTubeVideoId(videoUrl)
+            val thumbnailUrl = "https://img.youtube.com/vi/$videoId/0.jpg"
+
+            Glide.with(this)
+                .load(thumbnailUrl)
+                .placeholder(R.drawable.img_youtube_default)
+                .into(thumbnailYouTube)
+
+            thumbnailYouTube.setOnClickListener {
+                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(videoUrl))
+                startActivity(intent)
+            }
         } else {
-            webView.visibility = WebView.GONE
+            Glide.with(this)
+                .load(R.drawable.img_youtube_default)
+                .into(thumbnailYouTube)
+        }
+
+        // Cerrar la actividad cuando se presiona el botón de cerrar
+        btnCerrar.setOnClickListener {
+            finish()
         }
     }
 
     override fun onMapReady(map: GoogleMap) {
         googleMap = map
-
-        // Obtener latitud y longitud con la opción por defecto
-        val latitud = intent.getStringExtra("latitud")?.toDoubleOrNull() ?: 10.426869410231593
-        val longitud = intent.getStringExtra("longitud")?.toDoubleOrNull() ?: -85.09165648252866
+        // Obtener la latitud y longitud pasadas desde el Intent
+        val latitud = intent.getDoubleExtra("latitud", 10.426869) // Si no hay datos, usa el valor por defecto
+        val longitud = intent.getDoubleExtra("longitud", -85.091656)
         val ubicacion = LatLng(latitud, longitud)
 
+        // Mueve los controles de Google Maps (logo y botón de navegación)
+        googleMap?.setPadding(0, 100, 0, 100) // Ajusta el logo más arriba
+        googleMap?.uiSettings?.isMapToolbarEnabled = true // Asegura que el botón de navegación esté visible
+
+        // Agrega marcador en la ubicación del comercio
         googleMap?.addMarker(MarkerOptions().position(ubicacion).title("Ubicación del comercio"))
         googleMap?.moveCamera(CameraUpdateFactory.newLatLngZoom(ubicacion, 15f))
     }
-
-    override fun onResume() {
-        super.onResume()
-        mapView.onResume()
-    }
-
-    override fun onPause() {
-        super.onPause()
-        mapView.onPause()
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        mapView.onDestroy()
+    
+    private fun getYouTubeVideoId(videoUrl: String): String {
+        val regex = "(?<=watch\\?v=|/videos/|embed/|youtu.be/|/v/|e/|watch\\?v%3D|watch\\?feature=player_embedded&v=|%2Fvideos%2F|embed%2F|%2Fv%2F|e%2F|watch\\?v%3D|watch\\?feature=player_embedded&v%3D|youtu.be%2F|%2Fv%2F|%2Fembed%2F|%2Fe%2F|%2Fwatch\\?v%3D|%2Fwatch\\?feature=player_embedded&v%3D|%2Fvideos%2F|%2Fembed%2F|%2Fe%2F|%2Fv%2F|youtu\\.be/|v%3D)([a-zA-Z0-9_-]{11})".toRegex()
+        val matchResult = regex.find(videoUrl)
+        return matchResult?.groups?.get(1)?.value ?: ""
     }
 }

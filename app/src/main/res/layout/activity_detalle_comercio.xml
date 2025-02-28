@@ -36,12 +36,14 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <!-- Icono del comercio (sin background para permitir que se vea bien) -->
+        <!-- Icono del comercio -->
         <ImageView
             android:id="@+id/iconoComercio"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:padding="10dp"
+            android:scaleType="centerCrop"
+            android:background="@drawable/bg_categoria"
+            android:padding="6dp"
             android:elevation="8dp"
             app:layout_constraintTop_toBottomOf="@id/menu_icon"
             app:layout_constraintStart_toStartOf="parent"
@@ -49,7 +51,7 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <!-- Sección verde con esquinas redondeadas -->
+    <!-- Contenedor verde con esquinas redondeadas -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/contenedorVerde"
         android:layout_width="match_parent"
@@ -67,7 +69,7 @@
             android:textSize="22sp"
             android:textStyle="bold"
             android:textColor="@color/blanco"
-            app:layout_constraintTop_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="16dp" />
@@ -85,42 +87,66 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="4dp" />
 
-        <!-- Mapa redondeado -->
-        <com.google.android.gms.maps.MapView
-            android:id="@+id/mapView"
+        <!-- Contenedor para el mapa con bordes redondeados -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/mapContainer"
             android:layout_width="250dp"
             android:layout_height="250dp"
-            android:background="@drawable/bg_categoria"
+            app:cardCornerRadius="125dp"
+            android:elevation="4dp"
+            app:cardBackgroundColor="@android:color/white"
             app:layout_constraintTop_toBottomOf="@id/tvDescripcion"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="16dp" />
+            android:layout_marginTop="16dp">
 
-        <!-- Video de YouTube con margen adecuado -->
-        <WebView
-            android:id="@+id/webViewVideo"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            app:layout_constraintTop_toBottomOf="@id/mapView"
+            <com.google.android.gms.maps.MapView
+                android:id="@+id/mapView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipToOutline="true"/>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Texto "Video de YouTube" -->
+        <TextView
+            android:id="@+id/tvVideoYoutube"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Video de YouTube"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@color/blanco"
+            app:layout_constraintBottom_toTopOf="@id/thumbnailYouTube"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginTop="25dp" />
+            android:layout_marginBottom="8dp"/>
 
-        <!-- Teléfono con mejor espaciado -->
+        <!-- Miniatura de YouTube -->
+        <ImageView
+            android:id="@+id/thumbnailYouTube"
+            android:layout_width="230dp"
+            android:layout_height="160dp"
+            android:scaleType="centerCrop"
+            android:contentDescription="Miniatura del video"
+            android:src="@drawable/img_youtube_default"
+            app:layout_constraintTop_toBottomOf="@id/mapContainer"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="40dp"/>
+
+        <!-- Teléfono -->
         <TextView
             android:id="@+id/tvTelefono"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Teléfono: 00000000"
             android:textSize="16sp"
             android:textColor="@color/blanco"
-            app:layout_constraintTop_toBottomOf="@id/webViewVideo"
+            app:layout_constraintTop_toBottomOf="@id/thumbnailYouTube"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="24dp" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
