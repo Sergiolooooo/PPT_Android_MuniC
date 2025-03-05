@@ -40,9 +40,7 @@ class ComercioAdapter(
             val intent = Intent(holder.itemView.context, DetalleComercio::class.java).apply {
                 putExtra("nombre", comercio.nombre)
                 putExtra("descripcion", comercio.descripcion)
-                // Convertir latitud y longitud a Double para evitar errores en el mapa
-                putExtra("latitud", comercio.latitud.toDoubleOrNull() ?: 0.0)
-                putExtra("longitud", comercio.longitud.toDoubleOrNull() ?: 0.0)
+                putExtra("url_google", comercio.google)
                 putExtra("telefono", comercio.telefono)
                 putExtra("video_youtube", comercio.videoYoutube) // Agregar video
             }

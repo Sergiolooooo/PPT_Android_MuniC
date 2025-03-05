@@ -58,13 +58,14 @@
 </androidx.constraintlayout.widget.ConstraintLayout>
 
     <!-- RecyclerView para las categorías -->
-<androidx.recyclerview.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewCategorias"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:padding="10dp"
         android:scrollbars="vertical"
-        app:layout_constraintTop_toBottomOf="@id/barra_superior"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        app:layout_constraintTop_toBottomOf="@id/barra_superior" />
+</androidx.constraintlayout.widget.ConstraintLayout>
