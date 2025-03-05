@@ -42,7 +42,7 @@ class ComercioAdapter(
                 putExtra("descripcion", comercio.descripcion)
                 putExtra("url_google", comercio.google)
                 putExtra("telefono", comercio.telefono)
-                putExtra("video_youtube", comercio.videoYoutube) // Agregar video
+                putExtra("video_youtube", comercio.videoYoutube)
             }
             holder.itemView.context.startActivity(intent)
         }
