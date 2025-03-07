@@ -38,6 +38,7 @@ class ComercioAdapter(
 
         holder.itemView.setOnClickListener {
             val intent = Intent(holder.itemView.context, DetalleComercio::class.java).apply {
+                putExtra("id_comercio", comercio.id) // 🔹 Agregar ID del comercio
                 putExtra("nombre", comercio.nombre)
                 putExtra("descripcion", comercio.descripcion)
                 putExtra("url_google", comercio.google)
@@ -46,7 +47,6 @@ class ComercioAdapter(
             }
             holder.itemView.context.startActivity(intent)
         }
-
     }
 
     override fun getItemCount() = comercios.size

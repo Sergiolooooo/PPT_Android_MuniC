@@ -1,7 +1,0 @@
-<shape xmlns:android="http://schemas.android.com/apk/res/android"
-    android:shape="rectangle">
-
-    <solid android:color="@color/verde_fondo"/>
-    <corners android:topLeftRadius="50dp" android:topRightRadius="50dp"/> <!-- 🔹 Asegurar redondeo -->
-    <padding android:top="20dp"/> <!-- 🔹 Agrega un pequeño padding interno -->
-</shape>

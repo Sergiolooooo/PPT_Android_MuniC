@@ -70,4 +70,6 @@ dependencies {
     implementation(libs.glide)
     kapt(libs.glide.compiler)
     annotationProcessor(libs.glide.compiler)
+    implementation (libs.google.flexbox)
+
 }
