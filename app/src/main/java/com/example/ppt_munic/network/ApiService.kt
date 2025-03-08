@@ -1,5 +1,6 @@
 package com.example.ppt_munic.network
 
+import com.example.ppt_munic.data.Productos.ProductosRespuesta
 import com.example.ppt_munic.data.Redes_Sociales.RedesRespuesta
 import com.example.ppt_munic.data.categoria.CategoriaRespuesta
 import com.example.ppt_munic.data.comercio.ComercioRespuesta
@@ -19,4 +20,8 @@ interface ApiService {
 
     @GET("api/redesSociales/comercio") // RUTA PARA OBTENER REDES POR COMERCIO
     fun getRedesByComercio(@Query("comercio") comercio: Int): Call<RedesRespuesta>
+
+    @GET("api/productos/productos") // ✅ Ahora coincide con el backend
+    fun getProductosByComercio(@Query("comercio") comercio: Int): Call<ProductosRespuesta>
+
 }

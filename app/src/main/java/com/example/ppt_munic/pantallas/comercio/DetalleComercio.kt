@@ -29,6 +29,7 @@ class DetalleComercio : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detalle_comercio)
 
+        // 🔹 Inicializar vistas
         val iconoComercio: ImageView = findViewById(R.id.iconoComercio)
         val tvNombre: TextView = findViewById(R.id.tvNombre)
         val tvDescripcion: TextView = findViewById(R.id.tvDescripcion)
@@ -37,6 +38,18 @@ class DetalleComercio : AppCompatActivity() {
         rvRedesSociales = findViewById(R.id.rvRedesSociales)
         btnCerrar = findViewById(R.id.btn_cerrar)
 
+        // 🔹 Asegurar que el botón `Cerrar` reciba clics correctamente
+        btnCerrar.isClickable = true
+        btnCerrar.isFocusable = true
+        btnCerrar.bringToFront() // 🔹 Asegura que el botón esté en la capa superior
+
+        // 🔹 Configuración de botón de cierre con depuración
+        btnCerrar.setOnClickListener {
+            Log.d("DetalleComercio", "Botón cerrar presionado")
+            finish()
+        }
+
+        // 🔹 Obtener datos del intent
         val nombre = intent.getStringExtra("nombre") ?: "Sin nombre"
         val descripcion = intent.getStringExtra("descripcion") ?: "Sin descripción"
         val telefono = intent.getStringExtra("telefono")
@@ -48,6 +61,7 @@ class DetalleComercio : AppCompatActivity() {
         Log.d("TEST_VIDEO", "URL de YouTube recibida: $videoUrl")
         Log.d("TEST_COMERCIO", "ID del comercio: $comercioId")
 
+        // 🔹 Asignar datos a los elementos de la UI
         tvNombre.text = nombre
         tvDescripcion.text = descripcion
         tvTelefono.text = if (!telefono.isNullOrEmpty() && telefono != "null") "Teléfono: $telefono" else "Teléfono: No disponible"
@@ -57,10 +71,7 @@ class DetalleComercio : AppCompatActivity() {
             .placeholder(R.drawable.ic_default)
             .into(iconoComercio)
 
-        btnCerrar.setOnClickListener {
-            finish()
-        }
-
+        // 🔹 Verificar y mostrar botón de Google Maps si la URL es válida
         if (isValidGoogleUrl(urlGoogle)) {
             btnGoogle.visibility = View.VISIBLE
             btnGoogle.setOnClickListener {
@@ -71,13 +82,13 @@ class DetalleComercio : AppCompatActivity() {
             btnGoogle.visibility = View.GONE
         }
 
+        // 🔹 Obtener redes sociales si hay un comercio válido
         if (comercioId != -1) {
             obtenerRedesSociales(comercioId, videoUrl)
         }
 
         Log.d("TEST_LOG", "Iniciando DetalleComercio")
     }
-
 
     private fun obtenerRedesSociales(comercioId: Int, videoUrl: String) {
         lifecycleScope.launch(Dispatchers.IO) {
@@ -93,7 +104,7 @@ class DetalleComercio : AppCompatActivity() {
                     withContext(Dispatchers.Main) {
                         val totalItems = redesSociales.size + if (videoUrl != "Sin video") 1 else 0
 
-                        // 🔹 Usamos FlexboxLayoutManager para distribuir uniformemente los iconos
+                        // 🔹 Configurar diseño de RecyclerView con FlexboxLayoutManager
                         val flexboxLayoutManager = FlexboxLayoutManager(this@DetalleComercio)
                         flexboxLayoutManager.justifyContent = JustifyContent.CENTER
 

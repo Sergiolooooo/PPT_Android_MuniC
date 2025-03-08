@@ -2,7 +2,6 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/verde_fondo">
@@ -11,32 +10,37 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/contenedorSuperior"
         android:layout_width="match_parent"
-        android:layout_height="280dp"
-        android:background="@drawable/bg_redondeado_arriba"
+        android:layout_height="260dp"
+        android:background="@drawable/bg_redondeado_abajo"
         app:layout_constraintTop_toTopOf="parent"
-        android:elevation="10dp">
+        android:elevation="10dp"
+        android:padding="16dp">
+
 
         <!-- Botón de menú -->
         <ImageView
             android:id="@+id/menu_icon"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:src="@drawable/ic_menu"
             app:tint="@color/marron_texto"
-            android:layout_margin="16dp"
+            android:layout_margin="12dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <!-- Botón de cerrar -->
         <ImageView
             android:id="@+id/btn_cerrar"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:scaleType="fitCenter"
             android:src="@drawable/ic_close"
+            android:background="?attr/selectableItemBackground"
             app:tint="@color/marron_texto"
-            android:layout_margin="16dp"
+            android:layout_margin="12dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"/>
+
 
         <!-- Icono del comercio -->
         <ImageView
@@ -58,22 +62,21 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/contenedorVerde"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:background="@color/verde_fondo"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/contenedorSuperior"
-        app:layout_constraintVertical_bias="0.489"
-        tools:layout_editor_absoluteX="0dp">
+        app:layout_constraintBottom_toBottomOf="parent">
+
 
         <!-- Nombre del comercio -->
         <TextView
             android:id="@+id/tvNombre"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="16dp"
             android:text="Nombre del Comercio"
             android:textColor="@color/blanco"
-            android:textSize="22sp"
+            android:textSize="26sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -84,10 +87,10 @@
             android:id="@+id/tvDescripcion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="8dp"
             android:text="Descripción del comercio"
             android:textColor="@color/blanco"
-            android:textSize="16sp"
+            android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvNombre" />
@@ -97,10 +100,10 @@
             android:id="@+id/tvRedesSociales"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="34dp"
             android:text="Redes Sociales"
             android:textColor="@color/blanco"
-            android:textSize="22sp"
+            android:textSize="26sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -125,7 +128,7 @@
             android:layout_marginTop="24dp"
             android:text="Ubicación del comercio"
             android:textColor="@color/blanco"
-            android:textSize="16sp"
+            android:textSize="26sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -148,11 +151,51 @@
             android:id="@+id/tvTelefono"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="20dp"
             android:textColor="@color/blanco"
-            android:textSize="18sp"
+            android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/btnGoogle" />
+
+        <!-- Contenedor de Iconos de Álbum y Productos -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/contenedorIconos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/tvTelefono"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="34dp">
+
+            <!-- Icono de Álbum -->
+            <ImageView
+                android:id="@+id/btnAlbum"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:src="@drawable/ic_album"
+                android:scaleType="centerCrop"
+                android:background="@drawable/bg_categoria"
+                android:padding="12dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/btnProductos"
+                app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginEnd="32dp"/>
+
+            <!-- Icono de Productos -->
+            <ImageView
+                android:id="@+id/btnProductos"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:src="@drawable/ic_productos"
+                android:scaleType="centerCrop"
+                android:background="@drawable/bg_categoria"
+                android:padding="12dp"
+                app:layout_constraintStart_toEndOf="@id/btnAlbum"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/> <!-- 🔹 Restricción vertical agregada -->
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

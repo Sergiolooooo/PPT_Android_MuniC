@@ -2,14 +2,14 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="rectangle">
 
-    <!-- Define bordes redondeados en la parte superior -->
-    <corners android:topLeftRadius="30dp"
-        android:topRightRadius="30dp" />
+    <!-- Bordes redondeados en la parte inferior -->
+    <corners android:bottomLeftRadius="30dp"
+        android:bottomRightRadius="30dp" />
 
-    <!-- Fondo blanco -->
+    <!-- Color de fondo blanco -->
     <solid android:color="@color/blanco" />
 
-    <!-- Sombra para darle efecto elevado -->
+    <!-- Sombra para darle un efecto elevado -->
     <padding android:left="2dp"
         android:right="2dp"
         android:top="2dp"
