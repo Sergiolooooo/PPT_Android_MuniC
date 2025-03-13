@@ -2,9 +2,9 @@ package com.example.ppt_munic.pantallas.categoria
 
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ppt_munic.R
 import com.example.ppt_munic.data.categoria.Categoria
@@ -25,8 +25,10 @@ class CategoriasActivity : AppCompatActivity() {
         setContentView(R.layout.activity_categorias)
 
         recyclerView = findViewById(R.id.recyclerViewCategorias)
-        recyclerView.layoutManager = GridLayoutManager(this, 3, GridLayoutManager.VERTICAL, false)
 
+        // ✅ Volvemos a GridLayoutManager para que se vean 3 por fila
+        val gridLayoutManager = GridLayoutManager(this, 3) // 3 columnas
+        recyclerView.layoutManager = gridLayoutManager
 
         categoriaAdapter = CategoriaAdapter(emptyList())
         recyclerView.adapter = categoriaAdapter
@@ -38,21 +40,18 @@ class CategoriasActivity : AppCompatActivity() {
         RetrofitClient.api.getCategorias().enqueue(object : Callback<CategoriaRespuesta> {
             override fun onResponse(call: Call<CategoriaRespuesta>, response: Response<CategoriaRespuesta>) {
                 if (response.isSuccessful) {
-                    val categoriaResponse = response.body()
-                    val categorias: List<Categoria> = categoriaResponse?.data ?: emptyList()
-
-                    // 🔹 AQUÍ SE LLAMA actualizarLista() para actualizar el RecyclerView
+                    val categorias = response.body()?.data ?: emptyList()
                     categoriaAdapter.actualizarLista(categorias)
                 } else {
                     Log.e("API_ERROR", "Error en la respuesta: ${response.code()}")
+                    Toast.makeText(this@CategoriasActivity, "Error al obtener datos", Toast.LENGTH_LONG).show()
                 }
             }
 
             override fun onFailure(call: Call<CategoriaRespuesta>, t: Throwable) {
                 Log.e("API_ERROR", "Fallo en la llamada: ${t.message}")
+                Toast.makeText(this@CategoriasActivity, "No se pudo conectar con el servidor", Toast.LENGTH_LONG).show()
             }
         })
     }
-
-
 }

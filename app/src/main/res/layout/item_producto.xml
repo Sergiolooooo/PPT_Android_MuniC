@@ -1,41 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:padding="8dp">
+    android:padding="12dp"
+    android:background="@color/blanco">
 
-    <TextView
-        android:id="@+id/textNombre"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:text="Nombre del producto"
-        android:layout_marginBottom="4dp"
+    <!-- Imagen del producto -->
+    <ImageView
+        android:id="@+id/imgProducto"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:src="@drawable/ic_default"
+        android:scaleType="fitCenter"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
+    <!-- Nombre del producto -->
     <TextView
-        android:id="@+id/textDescripcion"
+        android:id="@+id/tvNombreProducto"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:textSize="14sp"
-        android:text="Descripción del producto"
-        android:layout_marginBottom="4dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textNombre"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:text="Nombre del producto"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="@color/marron_texto"
+        app:layout_constraintStart_toEndOf="@id/imgProducto"
+        app:layout_constraintTop_toTopOf="@id/imgProducto"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="15dp"/>
 
+    <!-- Descripción del producto -->
     <TextView
-        android:id="@+id/textPrecio"
-        android:layout_width="wrap_content"
+        android:id="@+id/tvDescripcionProducto"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:textColor="@android:color/holo_red_dark"
-        android:text="₡0.00"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textDescripcion" />
+        android:text="Descripción del producto"
+        android:textSize="14sp"
+        android:textColor="@color/marron_texto"
+        app:layout_constraintStart_toEndOf="@id/imgProducto"
+        app:layout_constraintTop_toBottomOf="@id/tvNombreProducto"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="4dp"/>
 
+    <!-- Precio del producto -->
+    <TextView
+        android:id="@+id/tvPrecioProducto"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="₡0.00"
+        android:textSize="16sp"
+        android:textColor="@android:color/holo_green_dark"
+        app:layout_constraintStart_toEndOf="@id/imgProducto"
+        app:layout_constraintTop_toBottomOf="@id/tvDescripcionProducto"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="4dp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

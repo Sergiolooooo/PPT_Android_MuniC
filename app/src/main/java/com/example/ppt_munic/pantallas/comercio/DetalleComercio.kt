@@ -14,6 +14,7 @@ import com.bumptech.glide.Glide
 import com.example.ppt_munic.R
 import com.example.ppt_munic.data.Redes_Sociales.RedesSocialesAdapter
 import com.example.ppt_munic.network.RetrofitClient
+import com.example.ppt_munic.pantallas.producto.ProductosActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -23,6 +24,7 @@ import com.google.android.flexbox.JustifyContent
 class DetalleComercio : AppCompatActivity() {
 
     private lateinit var btnCerrar: ImageView
+    private lateinit var btnProductos: ImageView
     private lateinit var rvRedesSociales: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,6 +39,8 @@ class DetalleComercio : AppCompatActivity() {
         val btnGoogle: ImageView = findViewById(R.id.btnGoogle)
         rvRedesSociales = findViewById(R.id.rvRedesSociales)
         btnCerrar = findViewById(R.id.btn_cerrar)
+        btnProductos = findViewById(R.id.btnProductos)
+
 
         // 🔹 Asegurar que el botón `Cerrar` reciba clics correctamente
         btnCerrar.isClickable = true
@@ -88,6 +92,15 @@ class DetalleComercio : AppCompatActivity() {
         }
 
         Log.d("TEST_LOG", "Iniciando DetalleComercio")
+
+        btnProductos.setOnClickListener {
+            Log.d("DetalleComercio", "ID del comercio enviado a ProductosActivity: $comercioId")
+
+            val intent = Intent(this, ProductosActivity::class.java)
+            intent.putExtra("id_comercio", comercioId) // ✅ Ahora se envía correctamente
+            startActivity(intent)
+        }
+
     }
 
     private fun obtenerRedesSociales(comercioId: Int, videoUrl: String) {

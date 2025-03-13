@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/blanco"
+    android:padding="16dp">
+
+
+        <!-- Botón de menú -->
+        <ImageView
+            android:id="@+id/menu_icon"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_menu"
+            app:tint="@color/marron_texto"
+            android:layout_margin="12dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- Botón de cerrar -->
+        <ImageView
+            android:id="@+id/btn_cerrar"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_close"
+            android:background="?attr/selectableItemBackground"
+            app:tint="@color/marron_texto"
+            android:layout_margin="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <!-- Icono del comercio -->
+        <ImageView
+            android:id="@+id/iconoComercio"
+            android:layout_width="140dp"
+            android:layout_height="140dp"
+            android:scaleType="centerCrop"
+            android:background="@drawable/bg_categoria"
+            android:padding="6dp"
+            android:elevation="8dp"
+            app:layout_constraintTop_toBottomOf="@id/menu_icon"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="12dp"/>
+
+
+
+    <!-- Barra de búsqueda -->
+    <EditText
+        android:id="@+id/etBuscar"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:hint="Buscar"
+        android:background="@drawable/search_background"
+        android:textColorHint="@color/marron_texto"
+        android:textColor="@color/marron_texto"
+        android:paddingHorizontal="16dp"
+        android:elevation="5dp"
+        android:gravity="center_vertical"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@id/iconoComercio"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="15dp"/>
+
+    <!-- Contenedor para el scroll -->
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintTop_toBottomOf="@id/etBuscar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <!-- RecyclerView para productos -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerProductos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:nestedScrollingEnabled="false"/>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
