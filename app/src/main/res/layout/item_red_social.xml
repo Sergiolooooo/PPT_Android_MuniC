@@ -6,8 +6,8 @@
 
     <ImageView
         android:id="@+id/imgRedSocial"
-        android:layout_width="54dp"
-        android:layout_height="54dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:background="?android:attr/selectableItemBackground"
         android:scaleType="centerCrop"
         android:contentDescription="Icono de red social"/>

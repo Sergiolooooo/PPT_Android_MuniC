@@ -29,13 +29,8 @@ class CategoriaAdapter(
         val categoria = categorias[position]
         holder.tvCategoria.text = categoria.nombre
 
-        // Convertir a mayúsculas para evitar errores de comparación
-        when (categoria.nombre.uppercase()) {
-            "DEPORTES" -> holder.iconoCategoria.setImageResource(R.drawable.ic_comercio)
-            "HOTELES" -> holder.iconoCategoria.setImageResource(R.drawable.ic_hoteles)
-            "COMIDAS" -> holder.iconoCategoria.setImageResource(R.drawable.ic_sol)
-            else -> holder.iconoCategoria.setImageResource(R.drawable.ic_default)
-        }
+        // Asignar icono usando la función de AsignarIconos
+        holder.iconoCategoria.setImageResource(AsignarIconos.obtenerIconoPorCategoria(categoria.nombre))
 
         // Asegurar tamaño y escalado correcto del icono
         holder.iconoCategoria.layoutParams.width = 200
@@ -50,7 +45,6 @@ class CategoriaAdapter(
             holder.itemView.context.startActivity(intent)
         }
     }
-
 
     override fun getItemCount() = categorias.size
 

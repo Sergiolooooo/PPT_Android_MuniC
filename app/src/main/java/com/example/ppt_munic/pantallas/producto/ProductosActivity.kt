@@ -2,6 +2,7 @@ package com.example.ppt_munic.pantallas.producto
 
 import android.os.Bundle
 import android.util.Log
+import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -17,21 +18,36 @@ class ProductosActivity : AppCompatActivity() {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: ProductosAdapter
+    private lateinit var btnCerrar: ImageView
+    private lateinit var iconoComercio: ImageView
+    private var iconoResId: Int = R.drawable.ic_default // Valor por defecto
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_productos) // Usamos el XML que ya tienes
+        setContentView(R.layout.activity_productos)
 
         // Configurar RecyclerView
         recyclerView = findViewById(R.id.recyclerProductos)
         recyclerView.layoutManager = LinearLayoutManager(this)
+        btnCerrar = findViewById(R.id.btn_cerrar)
+        iconoComercio = findViewById(R.id.iconoComercio) // 🔹 Referencia al icono del comercio
 
-        adapter = ProductosAdapter(emptyList()) // Inicializa con lista vacía
+        // Recibir el ID del comercio y el icono de la categoría desde el Intent
+        val idComercio = intent.getIntExtra("id_comercio", 0)
+        iconoResId = intent.getIntExtra("iconoCategoria", R.drawable.ic_default) // 🔹 Recibe el ID del icono
+
+        // 🔹 Asignar el icono al comercio en la parte superior
+        iconoComercio.setImageResource(iconoResId)
+
+        // 🔹 Pasamos el ID del icono al adaptador de productos
+        adapter = ProductosAdapter(emptyList(), iconoResId)
         recyclerView.adapter = adapter
 
-        // Recibir el ID del comercio desde el Intent
-        val idComercio = intent.getIntExtra("id_comercio", 0)
         obtenerProductos(idComercio)
+
+        btnCerrar.setOnClickListener {
+            finish() // Cierra la actividad
+        }
     }
 
     private fun obtenerProductos(comercioId: Int) {
@@ -59,6 +75,4 @@ class ProductosActivity : AppCompatActivity() {
             }
         })
     }
-
-
 }

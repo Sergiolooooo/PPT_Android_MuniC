@@ -10,7 +10,6 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.example.ppt_munic.R
 import com.example.ppt_munic.data.Redes_Sociales.RedesSocialesAdapter
 import com.example.ppt_munic.network.RetrofitClient
@@ -41,13 +40,6 @@ class DetalleComercio : AppCompatActivity() {
         btnCerrar = findViewById(R.id.btn_cerrar)
         btnProductos = findViewById(R.id.btnProductos)
 
-
-        // 🔹 Asegurar que el botón `Cerrar` reciba clics correctamente
-        btnCerrar.isClickable = true
-        btnCerrar.isFocusable = true
-        btnCerrar.bringToFront() // 🔹 Asegura que el botón esté en la capa superior
-
-        // 🔹 Configuración de botón de cierre con depuración
         btnCerrar.setOnClickListener {
             Log.d("DetalleComercio", "Botón cerrar presionado")
             finish()
@@ -70,10 +62,8 @@ class DetalleComercio : AppCompatActivity() {
         tvDescripcion.text = descripcion
         tvTelefono.text = if (!telefono.isNullOrEmpty() && telefono != "null") "Teléfono: $telefono" else "Teléfono: No disponible"
 
-        Glide.with(this)
-            .load(iconoRes)
-            .placeholder(R.drawable.ic_default)
-            .into(iconoComercio)
+        // ✅ Corregido: Asignar icono directamente sin Glide
+        iconoComercio.setImageResource(iconoRes)
 
         // 🔹 Verificar y mostrar botón de Google Maps si la URL es válida
         if (isValidGoogleUrl(urlGoogle)) {
@@ -91,16 +81,14 @@ class DetalleComercio : AppCompatActivity() {
             obtenerRedesSociales(comercioId, videoUrl)
         }
 
-        Log.d("TEST_LOG", "Iniciando DetalleComercio")
-
         btnProductos.setOnClickListener {
             Log.d("DetalleComercio", "ID del comercio enviado a ProductosActivity: $comercioId")
 
             val intent = Intent(this, ProductosActivity::class.java)
-            intent.putExtra("id_comercio", comercioId) // ✅ Ahora se envía correctamente
+            intent.putExtra("id_comercio", comercioId)
+            intent.putExtra("iconoCategoria", iconoRes)
             startActivity(intent)
         }
-
     }
 
     private fun obtenerRedesSociales(comercioId: Int, videoUrl: String) {

@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ppt_munic.R
 import com.example.ppt_munic.data.comercio.ComercioAdapter
+import com.example.ppt_munic.data.categoria.AsignarIconos
 import com.example.ppt_munic.network.RetrofitClient
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.Dispatchers
@@ -36,13 +37,9 @@ class ComerciosActivity : AppCompatActivity() {
 
         val categoria = intent.getStringExtra("categoria") ?: ""
 
-        // Mostrar el icono correcto de la categoría
-        when (categoria) {
-            "DEPORTES" -> iconoCategoria.setImageResource(R.drawable.ic_comercio)
-            "HOTELES" -> iconoCategoria.setImageResource(R.drawable.ic_hoteles)
-            "COMIDAS" -> iconoCategoria.setImageResource(R.drawable.ic_sol)
-            else -> iconoCategoria.setImageResource(R.drawable.ic_default)
-        }
+        // 🔹 Usar la función de AsignarIconos para obtener el icono
+        val iconoResId = AsignarIconos.obtenerIconoPorCategoria(categoria)
+        iconoCategoria.setImageResource(iconoResId)
 
         tituloCategoria.text = categoria
 
@@ -50,17 +47,17 @@ class ComerciosActivity : AppCompatActivity() {
             finish() // Cierra la actividad
         }
 
-        obtenerComerciosPorCategoria(categoria)
+        obtenerComerciosPorCategoria(categoria, iconoResId) // ✅ Ahora pasamos el ID del icono
     }
 
-    private fun obtenerComerciosPorCategoria(categoria: String) {
+    private fun obtenerComerciosPorCategoria(categoria: String, iconoResId: Int) {
         lifecycleScope.launch(Dispatchers.IO) {  // Ejecuta en un hilo de fondo
             try {
                 val response = RetrofitClient.api.getComerciosByCategoria(categoria).execute()
                 if (response.isSuccessful) {
                     val comercios = response.body()?.data ?: emptyList()
                     withContext(Dispatchers.Main) {  // Actualiza la UI en el hilo principal
-                        comercioAdapter = ComercioAdapter(comercios, iconoCategoria.drawable)
+                        comercioAdapter = ComercioAdapter(comercios, iconoResId) // ✅ Pasamos el ID del recurso
                         recyclerView.adapter = comercioAdapter
                     }
                 }

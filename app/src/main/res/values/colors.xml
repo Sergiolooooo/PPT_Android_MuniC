@@ -5,4 +5,8 @@
     <color name="marron_texto">#350C06</color>
     <color name="blanco">#FFFFFF</color>
     <color name="gris_fondo">#F0DECE</color>
+
+    <color name="azul">#0057B8</color>  <!-- Azul fuerte -->
+    <color name="celeste">#00BFFF</color>  <!-- Celeste brillante -->
+    <color name="rosado_instagram">#FF6B9C</color>  <!-- Rosado similar al de Instagram -->
 </resources>

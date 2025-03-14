@@ -50,7 +50,7 @@ class RedesSocialesAdapter(
         } else if (!youtubeUrl.isNullOrEmpty()) {
             Log.d("BIND", "Agregando YouTube")
 
-            holder.imgRedSocial.setImageResource(R.drawable.ic_youtube)
+            holder.imgRedSocial.setImageResource(R.drawable.ic_youtubess)
             holder.imgRedSocial.layoutParams.width = 150
             holder.imgRedSocial.layoutParams.height = 150
             holder.itemView.setOnClickListener {
