@@ -49,6 +49,14 @@
         <activity android:name=".pantallas.producto.ProductosActivity"
             android:exported="false"
             android:theme="@style/Theme.PPT_MuniC"/>
+
+        <activity android:name=".pantallas.albumComercio.AlbumComercioActivity"
+            android:exported="false"
+            android:theme="@style/Theme.PPT_MuniC"/>
+
+        <activity android:name=".pantallas.albumComercio.ImagenCompletaActivity"
+            android:exported="false"
+            android:theme="@style/Theme.PPT_MuniC"/>
     </application>
 
 </manifest>

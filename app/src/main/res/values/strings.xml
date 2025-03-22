@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">PPT_MuniC</string>
+    <string name="menu">Menú</string>
+    <string name="zoom_image">Imagen ampliada</string>
+    <string name="cerrar">Cerrar</string>
+    <string name="album_image">Imagen del álbum</string>
 </resources>

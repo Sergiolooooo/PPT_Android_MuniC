@@ -71,5 +71,5 @@ dependencies {
     kapt(libs.glide.compiler)
     annotationProcessor(libs.glide.compiler)
     implementation (libs.google.flexbox)
-
+    implementation(libs.photoview)
 }

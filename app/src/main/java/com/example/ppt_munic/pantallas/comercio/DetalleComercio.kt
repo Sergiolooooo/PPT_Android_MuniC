@@ -12,6 +12,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ppt_munic.R
 import com.example.ppt_munic.data.Redes_Sociales.RedesSocialesAdapter
+import com.example.ppt_munic.pantallas.albumComercio.AlbumComercioActivity
 import com.example.ppt_munic.network.RetrofitClient
 import com.example.ppt_munic.pantallas.producto.ProductosActivity
 import kotlinx.coroutines.Dispatchers
@@ -24,6 +25,7 @@ class DetalleComercio : AppCompatActivity() {
 
     private lateinit var btnCerrar: ImageView
     private lateinit var btnProductos: ImageView
+    private lateinit var btnAlbum: ImageView
     private lateinit var rvRedesSociales: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,6 +41,7 @@ class DetalleComercio : AppCompatActivity() {
         rvRedesSociales = findViewById(R.id.rvRedesSociales)
         btnCerrar = findViewById(R.id.btn_cerrar)
         btnProductos = findViewById(R.id.btnProductos)
+        btnAlbum = findViewById(R.id.btnAlbum)
 
         btnCerrar.setOnClickListener {
             Log.d("DetalleComercio", "Botón cerrar presionado")
@@ -85,6 +88,15 @@ class DetalleComercio : AppCompatActivity() {
             Log.d("DetalleComercio", "ID del comercio enviado a ProductosActivity: $comercioId")
 
             val intent = Intent(this, ProductosActivity::class.java)
+            intent.putExtra("id_comercio", comercioId)
+            intent.putExtra("iconoCategoria", iconoRes)
+            startActivity(intent)
+        }
+
+        btnAlbum.setOnClickListener {
+            Log.d("DetalleComercio", "ID del comercio enviado a AlbumComercioActivity: $comercioId")
+
+            val intent = Intent(this, AlbumComercioActivity::class.java)
             intent.putExtra("id_comercio", comercioId)
             intent.putExtra("iconoCategoria", iconoRes)
             startActivity(intent)

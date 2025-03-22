@@ -11,11 +11,15 @@ pluginManagement {
         gradlePluginPortal()
     }
 }
+
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
+        // Orden recomendado: primero los oficiales
         google()
         mavenCentral()
+        // JitPack como fallback
+        maven("https://jitpack.io")
     }
 }
 

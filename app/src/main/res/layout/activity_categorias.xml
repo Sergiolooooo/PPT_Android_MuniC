@@ -16,46 +16,50 @@
     app:layout_constraintTop_toTopOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
-    android:padding="15dp">
+    android:padding="2dp">
 
+        <!-- MENU -->
     <ImageView
         android:id="@+id/menu_icon"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:src="@drawable/ic_menu"
         app:tint="@color/blanco"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="@id/titulo" />
+        android:layout_margin="12dp"
+      />
 
-    <TextView
-        android:id="@+id/titulo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Bienvenido"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:textColor="@color/blanco"
-        android:fontFamily="@font/flamante_round_bold"
-        app:layout_constraintStart_toEndOf="@id/menu_icon"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
 
-    <EditText
-        android:id="@+id/search_bar"
-        android:layout_width="0dp"
-        android:layout_height="45dp"
-        android:hint="Buscar..."
-        android:background="@drawable/search_background"
-        android:textColorHint="@color/marron_texto"
-        android:textColor="@color/marron_texto"
-        android:paddingHorizontal="16dp"
-        app:layout_constraintTop_toBottomOf="@id/titulo"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="10dp"/>
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/titulo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="70dp"
+            android:fontFamily="@font/flamante_round_bold"
+            android:text="Bienvenido"
+            android:textColor="@color/blanco"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/search_bar"
+            android:layout_width="0dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/search_background"
+            android:hint="Buscar..."
+            android:paddingHorizontal="20dp"
+            android:textColor="@color/marron_texto"
+            android:textColorHint="@color/marron_texto"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/titulo" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <!-- RecyclerView para las categorías -->
     <androidx.recyclerview.widget.RecyclerView

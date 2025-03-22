@@ -3,19 +3,29 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/blanco"
-    android:padding="16dp">
+    android:padding="2dp">
 
     <!-- Icono de menú -->
     <ImageView
         android:id="@+id/menu_icon"
-        android:layout_width="36dp"
-        android:layout_height="36dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:src="@drawable/ic_menu"
         app:tint="@color/marron_texto"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="10dp"
-        android:layout_marginStart="10dp"/>
+        android:layout_margin="12dp"/>
+
+    <!-- Botón de cerrar -->
+    <ImageView
+        android:id="@+id/btn_cerrar"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/ic_close"
+        app:tint="@color/marron_texto"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_margin="12dp"/>
 
     <!-- Icono de la categoría -->
     <ImageView
@@ -42,16 +52,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="15dp"/>
 
-    <!-- Botón de cerrar -->
-    <ImageView
-        android:id="@+id/btn_cerrar"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:src="@drawable/ic_close"
-        app:tint="@color/marron_texto"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_margin="10dp"/>
 
     <!-- Barra de búsqueda -->
     <EditText
