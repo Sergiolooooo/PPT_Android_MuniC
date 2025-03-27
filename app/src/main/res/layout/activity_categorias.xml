@@ -1,78 +1,99 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/blanco"
     tools:context=".pantallas.categoria.CategoriasActivity">
 
-    <!-- Barra verde superior con título y búsqueda -->
+    <!-- Contenido principal -->
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/barra_superior"
-        android:layout_width="0dp"
-        android:layout_height="200dp"
-    android:background="@color/verde_fondo"
-    app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    android:padding="2dp">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/blanco">
 
-        <!-- MENU -->
-    <ImageView
-        android:id="@+id/menu_icon"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:src="@drawable/ic_menu"
-        app:tint="@color/blanco"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_margin="12dp"
-      />
-
-
-        <TextView
-            android:id="@+id/titulo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="70dp"
-            android:fontFamily="@font/flamante_round_bold"
-            android:text="Bienvenido"
-            android:textColor="@color/blanco"
-            android:textSize="30sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <EditText
-            android:id="@+id/search_bar"
+        <!-- Tu barra superior personalizada -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/barra_superior"
             android:layout_width="0dp"
-            android:layout_height="45dp"
-            android:layout_marginTop="40dp"
-            android:background="@drawable/search_background"
-            android:hint="Buscar..."
-            android:paddingHorizontal="20dp"
-            android:textColor="@color/marron_texto"
-            android:textColorHint="@color/marron_texto"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
+            android:layout_height="200dp"
+            android:background="@color/verde_fondo"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/titulo" />
+            app:layout_constraintEnd_toEndOf="parent"
+            android:padding="2dp">
+
+            <!-- El menú que dispara el Drawer -->
+            <ImageView
+                android:id="@+id/menu_icon"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/ic_menu"
+                app:tint="@color/blanco"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_margin="12dp"
+                />
+
+            <TextView
+                android:id="@+id/titulo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="70dp"
+                android:fontFamily="@font/flamante_round_bold"
+                android:text="Bienvenido"
+                android:textColor="@color/blanco"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/search_bar"
+                android:layout_width="0dp"
+                android:layout_height="45dp"
+                android:layout_marginTop="40dp"
+                android:background="@drawable/search_background"
+                android:hint="Buscar..."
+                android:paddingHorizontal="20dp"
+                android:textColor="@color/marron_texto"
+                android:textColorHint="@color/marron_texto"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/titulo" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!-- RecyclerView -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewCategorias"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:scrollbars="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/barra_superior"
+            app:layout_constraintVertical_bias="0.085" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <!-- RecyclerView para las categorías -->
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewCategorias"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:scrollbars="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/barra_superior"
-        app:layout_constraintVertical_bias="0.082" />
+    <!-- Drawer real -->
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="260dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:background="@color/blanco"
+        app:menu="@menu/drawer_menu"
+        app:headerLayout="@layout/drawer_header"
+        app:itemIconTint="@null"
+    app:itemTextColor="@color/marron_texto" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.drawerlayout.widget.DrawerLayout>

@@ -5,6 +5,7 @@ import com.example.ppt_munic.data.Redes_Sociales.RedesRespuesta
 import com.example.ppt_munic.data.albumComercio.AlbumComercioRespuesta
 import com.example.ppt_munic.data.categoria.CategoriaRespuesta
 import com.example.ppt_munic.data.comercio.ComercioRespuesta
+import com.example.ppt_munic.data.noticias.NoticiaRespuesta
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -25,5 +26,9 @@ interface ApiService {
 
     @GET("api/albumComercio/comercio/{id}")
     fun getAlbumByComercio(@Path("id") comercioId: Int): Call<AlbumComercioRespuesta>
+
+    @GET("api/noticias")
+    fun getNoticias(): Call<NoticiaRespuesta>
+
 
 }

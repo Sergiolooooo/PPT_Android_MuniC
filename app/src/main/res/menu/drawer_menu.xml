@@ -1,0 +1,27 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_categoria"
+        android:icon="@drawable/ic_default"
+        android:title="Categoría"
+        android:iconTint="@null" />
+
+    <item
+        android:id="@+id/nav_noticias"
+        android:icon="@drawable/ic_default"
+        android:title="Noticias"
+        android:iconTint="@null" />
+
+    <item
+        android:id="@+id/nav_acerca"
+        android:icon="@drawable/ic_default"
+        android:title="Acerca de"
+        android:iconTint="@null" />
+
+    <item
+        android:id="@+id/nav_voz"
+        android:icon="@drawable/ic_default"
+        android:title="Voz del Pueblo"
+        android:iconTint="@null" />
+
+</menu>

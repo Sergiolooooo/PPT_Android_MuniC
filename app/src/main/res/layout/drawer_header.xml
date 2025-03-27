@@ -1,0 +1,47 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/blanco"
+    android:padding="16dp"
+    android:gravity="start">
+
+    <!-- Cierre (X) -->
+    <ImageView
+        android:id="@+id/close_drawer"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:src="@drawable/ic_close"
+        app:tint="@color/marron_texto"
+        android:layout_gravity="end"
+        android:contentDescription="Cerrar" />
+
+    <!-- Título -->
+    <TextView
+        android:id="@+id/drawer_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Menú"
+        android:textColor="@color/marron_texto"
+        android:textSize="20sp"
+        android:layout_marginTop="8dp"
+        android:textStyle="bold" />
+
+    <!-- Aquí irán las opciones del menú (por defecto) -->
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <!-- Ícono grande al pie del menú -->
+    <ImageView
+        android:id="@+id/drawer_logo_bottom"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/ic_default"
+        android:layout_gravity="center_horizontal"
+        app:tint="@color/amarillo_icono"
+        android:contentDescription="Logo grande" />
+</LinearLayout>
