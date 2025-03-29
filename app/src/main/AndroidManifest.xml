@@ -61,6 +61,9 @@
         <activity android:name=".pantallas.noticia.NoticiasActivity"
             android:exported="false"
             android:theme="@style/Theme.PPT_MuniC"/>
+        <activity android:name=".pantallas.noticia.DetalleNoticia"
+            android:exported="false"
+            android:theme="@style/Theme.PPT_MuniC"/>
     </application>
 
 </manifest>

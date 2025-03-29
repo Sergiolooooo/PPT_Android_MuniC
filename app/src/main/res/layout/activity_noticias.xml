@@ -4,84 +4,95 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/blanco">
+    android:layout_height="match_parent">
 
     <!-- CONTENIDO PRINCIPAL -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/verde_fondo">
+        android:background="@color/blanco"
+        android:padding="2dp">
 
-        <!-- Encabezado -->
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/contenedorSuperior"
-            android:layout_width="match_parent"
-            android:layout_height="220dp"
-            android:background="@drawable/bg_redondeado_abajo"
+        <!-- Icono de menú -->
+        <ImageView
+            android:id="@+id/menu_icon"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_menu"
+            app:tint="@color/marron_texto"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:elevation="10dp"
-            android:padding="2dp">
+            android:layout_margin="12dp"/>
 
-            <!-- Botón menú -->
-            <ImageView
-                android:id="@+id/menu_icon"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:src="@drawable/ic_menu"
-                app:tint="@color/marron_texto"
-                android:layout_margin="12dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+        <!-- Botón de cerrar -->
+        <ImageView
+            android:id="@+id/btn_cerrar"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_close"
+            app:tint="@color/marron_texto"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_margin="12dp"/>
 
-            <!-- Botón cerrar -->
-            <ImageView
-                android:id="@+id/btn_cerrar"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:scaleType="fitCenter"
-                android:src="@drawable/ic_close"
-                android:background="?attr/selectableItemBackground"
-                app:tint="@color/marron_texto"
-                android:layout_margin="12dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+        <!-- Icono de categoría -->
+        <ImageView
+            android:id="@+id/iconoCategoria"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/ic_default"
+            android:background="@drawable/bg_categoria"
+            android:padding="4dp"
+            android:elevation="6dp"
+            app:layout_constraintTop_toBottomOf="@id/menu_icon"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="10dp"/>
 
-            <!-- Icono -->
-            <ImageView
-                android:id="@+id/iconoComercio"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:background="@drawable/bg_categoria"
-                android:padding="4dp"
-                android:elevation="6dp"
-                app:layout_constraintTop_toBottomOf="@id/menu_icon"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginTop="10dp"/>
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        <!-- Título de la categoría -->
+        <TextView
+            android:id="@+id/titulo_categoria"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="NOTICIAS"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="@color/marron_texto"
+            android:fontFamily="@font/flamante_round_bold"
+            app:layout_constraintTop_toBottomOf="@id/iconoCategoria"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="15dp"/>
 
-        <!-- Contenedor verde inferior -->
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/contenedorVerde"
-            android:layout_width="match_parent"
+        <!-- Barra de búsqueda -->
+        <EditText
+            android:id="@+id/search_bar"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:hint="Buscar"
+            android:background="@drawable/search_background"
+            android:textColorHint="@color/marron_texto"
+            android:textColor="@color/marron_texto"
+            android:paddingHorizontal="16dp"
+            android:elevation="5dp"
+            android:gravity="center_vertical"
+            android:textSize="16sp"
+            app:layout_constraintTop_toBottomOf="@id/titulo_categoria"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="15dp"/>
+
+        <!-- RecyclerView de Noticias -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerNoticias"
+            android:layout_width="0dp"
             android:layout_height="0dp"
-            android:background="@color/verde_fondo"
-            app:layout_constraintTop_toBottomOf="@id/contenedorSuperior"
-            app:layout_constraintBottom_toBottomOf="parent">
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerNoticias"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:clipToPadding="false"
-                android:layout_marginTop="24dp"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:scrollbars="vertical"/>
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            android:scrollbars="vertical"
+            app:layout_constraintTop_toBottomOf="@id/search_bar"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="20dp"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <!-- MENU DRAWER -->
@@ -94,5 +105,5 @@
         app:menu="@menu/drawer_menu"
         app:headerLayout="@layout/drawer_header"
         app:itemIconTint="@null"
-        app:itemTextColor="@color/marron_texto" />
+        app:itemTextColor="@color/marron_texto"/>
 </androidx.drawerlayout.widget.DrawerLayout>

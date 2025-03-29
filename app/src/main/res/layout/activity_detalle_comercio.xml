@@ -101,7 +101,6 @@
             android:id="@+id/tvRedesSociales"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
             android:text="Redes Sociales"
             android:textColor="@color/blanco"
             android:textSize="24sp"

@@ -7,8 +7,8 @@ import android.widget.Toast
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.example.ppt_munic.R
+import com.example.ppt_munic.pantallas.categoria.CategoriasActivity
 import com.example.ppt_munic.pantallas.noticia.NoticiasActivity
-import com.example.ppt_munic.pantallas.producto.ProductosActivity
 import com.google.android.material.navigation.NavigationView
 
 object DrawerManager {
@@ -30,8 +30,10 @@ object DrawerManager {
         // Listener de opciones del Drawer
         navView.setNavigationItemSelectedListener {
             when (it.itemId) {
+
                 R.id.nav_categoria -> {
-                    // Ya estás en Categoría, no hace falta hacer nada
+                    val intent = Intent(activity, CategoriasActivity::class.java)
+                    activity.startActivity(intent)
                 }
                 R.id.nav_noticias -> {
                     val intent = Intent(activity, NoticiasActivity::class.java)

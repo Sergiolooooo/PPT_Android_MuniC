@@ -1,60 +1,55 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/blanco"
-    android:padding="12dp"
-    android:layout_marginBottom="8dp"
-    android:elevation="2dp">
+    android:padding="15dp"
+    android:background="@color/blanco">
 
-    <TextView
-        android:id="@+id/txtTitulo"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Título de la noticia"
-        android:textColor="@color/marron_texto"
-        android:textSize="18sp"
-        android:textStyle="bold"
+    <!-- Icono -->
+    <ImageView
+        android:id="@+id/imgIcono"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:src="@drawable/ic_default"
+        android:scaleType="fitCenter"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintBottom_toBottomOf="parent" />
 
-    <TextView
-        android:id="@+id/txtFecha"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="2025-03-25"
-        android:textColor="@color/amarillo_icono"
-        android:textSize="14sp"
-        app:layout_constraintTop_toBottomOf="@id/txtTitulo"
-        app:layout_constraintStart_toStartOf="parent"/>
-
-    <TextView
-        android:id="@+id/txtAutor"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Por Juan Pérez"
-        android:textColor="@color/marron_texto"
-        android:textSize="14sp"
-        android:textStyle="italic"
-        app:layout_constraintTop_toBottomOf="@id/txtTitulo"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBaseline_toBaselineOf="@id/txtFecha"/>
-
-    <TextView
-        android:id="@+id/txtContenido"
+    <!-- Contenedor de texto (título + fecha) alineado verticalmente -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/contenedorTexto"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Este es un resumen de la noticia que muestra una vista previa del contenido completo."
-        android:textColor="@color/marron_texto"
-        android:textSize="16sp"
-        android:maxLines="3"
-        android:ellipsize="end"
-        app:layout_constraintTop_toBottomOf="@id/txtFecha"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@id/imgIcono"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintTop_toTopOf="@id/imgIcono"
+        app:layout_constraintBottom_toBottomOf="@id/imgIcono"
+        android:layout_marginStart="12dp">
+
+        <TextView
+            android:id="@+id/txtTitulo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Título de la noticia"
+            android:textStyle="bold"
+            android:textColor="@color/marron_texto"
+            android:textSize="18sp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
+            android:id="@+id/txtFecha"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="2025-03-25"
+            android:textColor="@color/amarillo_icono"
+            android:textSize="16sp"
+            app:layout_constraintTop_toBottomOf="@id/txtTitulo"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

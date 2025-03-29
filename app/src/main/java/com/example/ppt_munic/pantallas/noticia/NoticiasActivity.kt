@@ -1,16 +1,21 @@
 package com.example.ppt_munic.pantallas.noticia
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.ImageView
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.ppt_munic.R
 import com.example.ppt_munic.data.noticias.Noticia
 import com.example.ppt_munic.data.noticias.NoticiaRespuesta
 import com.example.ppt_munic.databinding.ActivityNoticiasBinding
 import com.example.ppt_munic.network.RetrofitClient
 import com.example.ppt_munic.pantallas.menu.DrawerActivity
+import com.example.ppt_munic.pantallas.menu.DrawerManager
 import com.example.ppt_munic.ui.noticias.NoticiasAdapter
+import com.google.android.material.navigation.NavigationView
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -26,8 +31,21 @@ class NoticiasActivity : DrawerActivity() {
         binding = ActivityNoticiasBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // ✅ Solución efectiva para ViewBinding:
+        val drawerLayout = binding.root.findViewById<DrawerLayout>(R.id.drawer_layout)
+        val navView = binding.root.findViewById<NavigationView>(R.id.nav_view)
+        val menuIcon = binding.root.findViewById<ImageView>(R.id.menu_icon)
+
+        DrawerManager.setupDrawer(this, drawerLayout, navView, menuIcon)
+
+        // ✅ Adapter con navegación a la pantalla de detalle
         adapter = NoticiasAdapter(listaNoticias) { noticia ->
-            Toast.makeText(this, noticia.titulo, Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, DetalleNoticia::class.java)
+            intent.putExtra("titulo", noticia.titulo)
+            intent.putExtra("contenido", noticia.contenido)
+            intent.putExtra("fecha", noticia.fecha_publicacion.take(10))
+            intent.putExtra("autor", noticia.autor)
+            startActivity(intent)
         }
 
         binding.recyclerNoticias.layoutManager = LinearLayoutManager(this)
