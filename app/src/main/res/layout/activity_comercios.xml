@@ -1,83 +1,109 @@
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/blanco"
-    android:padding="2dp">
+    android:layout_height="match_parent">
 
-    <!-- Icono de menú -->
-    <ImageView
-        android:id="@+id/menu_icon"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:src="@drawable/ic_menu"
-        app:tint="@color/marron_texto"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_margin="12dp"/>
-
-    <!-- Botón de cerrar -->
-    <ImageView
-        android:id="@+id/btn_cerrar"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:src="@drawable/ic_close"
-        app:tint="@color/marron_texto"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_margin="12dp"/>
-
-    <!-- Icono de la categoría -->
-    <ImageView
-        android:id="@+id/iconoCategoria"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        app:layout_constraintTop_toBottomOf="@id/menu_icon"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="10dp"/>
-
-    <!-- Título de la categoría -->
-    <TextView
-        android:id="@+id/titulo_categoria"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Categoría"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:textColor="@color/marron_texto"
-        android:fontFamily="@font/flamante_round_bold"
-        app:layout_constraintTop_toBottomOf="@id/iconoCategoria"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="15dp"/>
-
-
-    <!-- Barra de búsqueda -->
-    <EditText
-        android:id="@+id/search_bar"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:hint="Buscar"
-        android:background="@drawable/search_background"
-        android:textColorHint="@color/marron_texto"
-        android:textColor="@color/marron_texto"
-        android:paddingHorizontal="16dp"
-        android:elevation="5dp"
-        android:gravity="center_vertical"
-        android:textSize="16sp"
-        app:layout_constraintTop_toBottomOf="@id/titulo_categoria"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="15dp"/>
-
-
-    <!-- RecyclerView para la lista de comercios -->
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewComercios"
+    <!-- CONTENIDO PRINCIPAL -->
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/search_bar"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginTop="20dp"/>
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_height="match_parent"
+        android:background="@color/blanco"
+        android:padding="2dp">
+
+        <!-- Icono de menú -->
+        <ImageView
+            android:id="@+id/menu_icon"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_menu"
+            app:tint="@color/marron_texto"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_margin="12dp"/>
+
+        <!-- Botón de cerrar -->
+        <ImageView
+            android:id="@+id/btn_cerrar"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_close"
+            app:tint="@color/marron_texto"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_margin="12dp"/>
+
+        <!-- Icono de la categoría -->
+        <ImageView
+            android:id="@+id/iconoCategoria"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:background="@drawable/bg_categoria"
+            android:padding="4dp"
+            android:elevation="6dp"
+            app:layout_constraintTop_toBottomOf="@id/menu_icon"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="10dp"/>
+
+        <!-- Título de la categoría -->
+        <TextView
+            android:id="@+id/titulo_categoria"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Categoría"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="@color/marron_texto"
+            android:fontFamily="@font/flamante_round_bold"
+            app:layout_constraintTop_toBottomOf="@id/iconoCategoria"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="15dp"/>
+
+        <!-- Barra de búsqueda -->
+        <EditText
+            android:id="@+id/search_bar"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:hint="Buscar"
+            android:background="@drawable/search_background"
+            android:textColorHint="@color/marron_texto"
+            android:textColor="@color/marron_texto"
+            android:paddingHorizontal="16dp"
+            android:elevation="5dp"
+            android:gravity="center_vertical"
+            android:textSize="16sp"
+            app:layout_constraintTop_toBottomOf="@id/titulo_categoria"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="15dp"/>
+
+        <!-- RecyclerView para la lista de comercios -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewComercios"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="20dp"
+            app:layout_constraintTop_toBottomOf="@id/search_bar"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- MENU DRAWER -->
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="260dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:background="@color/blanco"
+        app:menu="@menu/drawer_menu"
+        app:headerLayout="@layout/drawer_header"
+        app:itemIconTint="@null"
+        app:itemIconSize="40dp"
+        app:itemTextAppearance="@style/CustomMenuText" />
+
+</androidx.drawerlayout.widget.DrawerLayout>

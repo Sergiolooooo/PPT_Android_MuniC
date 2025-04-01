@@ -1,21 +1,22 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:background="@color/blanco"
-    android:padding="16dp"
-    android:gravity="start">
+    android:padding="16dp">
 
     <!-- Cierre (X) -->
     <ImageView
         android:id="@+id/close_drawer"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:src="@drawable/ic_close"
         app:tint="@color/marron_texto"
-        android:layout_gravity="end"
-        android:contentDescription="Cerrar" />
+        android:contentDescription="Cerrar"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <!-- Título -->
     <TextView
@@ -24,24 +25,23 @@
         android:layout_height="wrap_content"
         android:text="Menú"
         android:textColor="@color/marron_texto"
-        android:textSize="20sp"
-        android:layout_marginTop="8dp"
-        android:textStyle="bold" />
+        android:textSize="32sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/close_drawer"
+        app:layout_constraintBottom_toBottomOf="@id/close_drawer"
+        android:fontFamily="@font/flamante_round_bold" />
 
-    <!-- Aquí irán las opciones del menú (por defecto) -->
-
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
-
-    <!-- Ícono grande al pie del menú -->
+    <!-- Ícono grande abajo -->
     <ImageView
         android:id="@+id/drawer_logo_bottom"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:src="@drawable/ic_default"
-        android:layout_gravity="center_horizontal"
-        app:tint="@color/amarillo_icono"
-        android:contentDescription="Logo grande" />
-</LinearLayout>
+        android:contentDescription="Logo grande"
+        app:layout_constraintTop_toBottomOf="@id/close_drawer"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

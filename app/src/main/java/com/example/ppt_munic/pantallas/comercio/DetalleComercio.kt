@@ -14,6 +14,7 @@ import com.example.ppt_munic.R
 import com.example.ppt_munic.data.Redes_Sociales.RedesSocialesAdapter
 import com.example.ppt_munic.pantallas.albumComercio.AlbumComercioActivity
 import com.example.ppt_munic.network.RetrofitClient
+import com.example.ppt_munic.pantallas.menu.DrawerActivity
 import com.example.ppt_munic.pantallas.producto.ProductosActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -21,7 +22,7 @@ import kotlinx.coroutines.withContext
 import com.google.android.flexbox.FlexboxLayoutManager
 import com.google.android.flexbox.JustifyContent
 
-class DetalleComercio : AppCompatActivity() {
+class DetalleComercio : DrawerActivity() {
 
     private lateinit var btnCerrar: ImageView
     private lateinit var btnProductos: ImageView

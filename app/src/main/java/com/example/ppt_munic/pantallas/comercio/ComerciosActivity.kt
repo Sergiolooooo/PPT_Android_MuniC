@@ -4,19 +4,19 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ppt_munic.R
 import com.example.ppt_munic.data.comercio.ComercioAdapter
 import com.example.ppt_munic.data.categoria.AsignarIconos
 import com.example.ppt_munic.network.RetrofitClient
-import androidx.lifecycle.lifecycleScope
+import com.example.ppt_munic.pantallas.menu.DrawerActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import androidx.lifecycle.lifecycleScope
 
-class ComerciosActivity : AppCompatActivity() {
+class ComerciosActivity : DrawerActivity() {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var comercioAdapter: ComercioAdapter
@@ -37,27 +37,26 @@ class ComerciosActivity : AppCompatActivity() {
 
         val categoria = intent.getStringExtra("categoria") ?: ""
 
-        // 🔹 Usar la función de AsignarIconos para obtener el icono
+        // Asignar ícono y título
         val iconoResId = AsignarIconos.obtenerIconoPorCategoria(categoria)
         iconoCategoria.setImageResource(iconoResId)
-
         tituloCategoria.text = categoria
 
         btnCerrar.setOnClickListener {
-            finish() // Cierra la actividad
+            finish()
         }
 
-        obtenerComerciosPorCategoria(categoria, iconoResId) // ✅ Ahora pasamos el ID del icono
+        obtenerComerciosPorCategoria(categoria, iconoResId)
     }
 
     private fun obtenerComerciosPorCategoria(categoria: String, iconoResId: Int) {
-        lifecycleScope.launch(Dispatchers.IO) {  // Ejecuta en un hilo de fondo
+        lifecycleScope.launch(Dispatchers.IO) {
             try {
                 val response = RetrofitClient.api.getComerciosByCategoria(categoria).execute()
                 if (response.isSuccessful) {
                     val comercios = response.body()?.data ?: emptyList()
-                    withContext(Dispatchers.Main) {  // Actualiza la UI en el hilo principal
-                        comercioAdapter = ComercioAdapter(comercios, iconoResId) // ✅ Pasamos el ID del recurso
+                    withContext(Dispatchers.Main) {
+                        comercioAdapter = ComercioAdapter(comercios, iconoResId)
                         recyclerView.adapter = comercioAdapter
                     }
                 }

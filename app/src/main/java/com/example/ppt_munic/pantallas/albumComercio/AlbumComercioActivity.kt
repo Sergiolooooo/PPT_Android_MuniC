@@ -10,12 +10,13 @@ import com.example.ppt_munic.R
 import com.example.ppt_munic.data.albumComercio.AlbumComercioAdapter
 import com.example.ppt_munic.data.albumComercio.AlbumComercioRespuesta
 import com.example.ppt_munic.network.RetrofitClient
+import com.example.ppt_munic.pantallas.menu.DrawerActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.io.File
 
-class AlbumComercioActivity : AppCompatActivity() {
+class AlbumComercioActivity : DrawerActivity() {
 
     private lateinit var recyclerAlbum: RecyclerView
     private lateinit var btnCerrar: ImageView

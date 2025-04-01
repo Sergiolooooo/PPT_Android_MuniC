@@ -2,25 +2,25 @@
 
     <item
         android:id="@+id/nav_categoria"
-        android:icon="@drawable/ic_default"
+        android:icon="@drawable/menu_comercios"
         android:title="Categoría"
         android:iconTint="@null" />
 
     <item
         android:id="@+id/nav_noticias"
-        android:icon="@drawable/ic_default"
+        android:icon="@drawable/menu_noticias"
         android:title="Noticias"
         android:iconTint="@null" />
 
     <item
         android:id="@+id/nav_acerca"
-        android:icon="@drawable/ic_default"
+        android:icon="@drawable/menu_acerca"
         android:title="Acerca de"
         android:iconTint="@null" />
 
     <item
         android:id="@+id/nav_voz"
-        android:icon="@drawable/ic_default"
+        android:icon="@drawable/menu_voz"
         android:title="Voz del Pueblo"
         android:iconTint="@null" />
 

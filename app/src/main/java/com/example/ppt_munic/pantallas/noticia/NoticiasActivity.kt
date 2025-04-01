@@ -25,6 +25,7 @@ class NoticiasActivity : DrawerActivity() {
     private lateinit var binding: ActivityNoticiasBinding
     private lateinit var adapter: NoticiasAdapter
     private val listaNoticias = mutableListOf<Noticia>()
+    private lateinit var btnCerrar: ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,6 +36,7 @@ class NoticiasActivity : DrawerActivity() {
         val drawerLayout = binding.root.findViewById<DrawerLayout>(R.id.drawer_layout)
         val navView = binding.root.findViewById<NavigationView>(R.id.nav_view)
         val menuIcon = binding.root.findViewById<ImageView>(R.id.menu_icon)
+        btnCerrar = findViewById(R.id.btn_cerrar)
 
         DrawerManager.setupDrawer(this, drawerLayout, navView, menuIcon)
 
@@ -51,7 +53,12 @@ class NoticiasActivity : DrawerActivity() {
         binding.recyclerNoticias.layoutManager = LinearLayoutManager(this)
         binding.recyclerNoticias.adapter = adapter
 
+        btnCerrar.setOnClickListener {
+            finish()
+        }
+
         obtenerNoticias()
+
     }
 
     private fun obtenerNoticias() {

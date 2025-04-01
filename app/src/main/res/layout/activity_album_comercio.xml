@@ -1,80 +1,99 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<androidx.drawerlayout.widget.DrawerLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/verde_fondo">
+    android:layout_height="match_parent">
 
-    <!-- Contenedor superior con fondo blanco y bordes redondeados -->
+    <!-- CONTENIDO PRINCIPAL -->
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/contenedorSuperior"
         android:layout_width="match_parent"
-        android:layout_height="220dp"
-        android:background="@drawable/bg_redondeado_abajo"
-        app:layout_constraintTop_toTopOf="parent"
-        android:elevation="10dp"
-        android:padding="2dp">
+        android:layout_height="match_parent"
+        android:background="@color/verde_fondo">
 
-        <!-- Botón de menú -->
-        <ImageView
-            android:id="@+id/menu_icon"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:src="@drawable/ic_menu"
-            app:tint="@color/marron_texto"
-            android:layout_margin="12dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <!-- Botón de cerrar -->
-        <ImageView
-            android:id="@+id/btn_cerrar"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:scaleType="fitCenter"
-            android:src="@drawable/ic_close"
-            android:background="?attr/selectableItemBackground"
-            app:tint="@color/marron_texto"
-            android:layout_margin="12dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
-
-        <!-- Icono del comercio -->
-        <ImageView
-            android:id="@+id/iconoComercio"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:background="@drawable/bg_categoria"
-            android:padding="4dp"
-            android:elevation="6dp"
-            app:layout_constraintTop_toBottomOf="@id/menu_icon"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="10dp"/>
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <!-- Contenedor verde sin bordes redondeados -->
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/contenedorVerde"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:background="@color/verde_fondo"
-        app:layout_constraintTop_toBottomOf="@id/contenedorSuperior"
-        app:layout_constraintBottom_toBottomOf="parent">
-
-        <!-- RecyclerView DENTRO de contenedorVerde -->
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_album"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:clipToPadding="false"
-            android:layout_marginTop="24dp"
+        <!-- Contenedor superior con fondo blanco y bordes redondeados -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/contenedorSuperior"
+            android:layout_width="match_parent"
+            android:layout_height="220dp"
+            android:background="@drawable/bg_redondeado_abajo"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:scrollbars="vertical"/>
+            android:elevation="10dp"
+            android:padding="2dp">
+
+            <!-- Botón de menú -->
+            <ImageView
+                android:id="@+id/menu_icon"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/ic_menu"
+                app:tint="@color/marron_texto"
+                android:layout_margin="12dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <!-- Botón de cerrar -->
+            <ImageView
+                android:id="@+id/btn_cerrar"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_close"
+                android:background="?attr/selectableItemBackground"
+                app:tint="@color/marron_texto"
+                android:layout_margin="12dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <!-- Icono del comercio -->
+            <ImageView
+                android:id="@+id/iconoComercio"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:background="@drawable/bg_categoria"
+                android:padding="4dp"
+                android:elevation="6dp"
+                app:layout_constraintTop_toBottomOf="@id/menu_icon"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="10dp"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!-- Contenedor verde sin bordes redondeados -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/contenedorVerde"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@color/verde_fondo"
+            app:layout_constraintTop_toBottomOf="@id/contenedorSuperior"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <!-- RecyclerView del Álbum -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_album"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:clipToPadding="false"
+                android:layout_marginTop="24dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:scrollbars="vertical"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <!-- MENÚ DRAWER -->
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="260dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:background="@color/blanco"
+        app:menu="@menu/drawer_menu"
+        app:headerLayout="@layout/drawer_header"
+        app:itemIconTint="@null"
+        app:itemIconSize="40dp"
+        app:itemTextAppearance="@style/CustomMenuText" />
+</androidx.drawerlayout.widget.DrawerLayout>

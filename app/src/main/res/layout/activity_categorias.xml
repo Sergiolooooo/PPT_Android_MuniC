@@ -82,7 +82,7 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <!-- Drawer real -->
+    <!-- MENU DRAWER -->
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view"
         android:layout_width="260dp"
@@ -92,8 +92,7 @@
         app:menu="@menu/drawer_menu"
         app:headerLayout="@layout/drawer_header"
         app:itemIconTint="@null"
-    app:itemTextColor="@color/marron_texto" />
-
-
+        app:itemIconSize="40dp"
+        app:itemTextAppearance="@style/CustomMenuText" /> <!-- ✅ estilo que controla todo -->
 
 </androidx.drawerlayout.widget.DrawerLayout>

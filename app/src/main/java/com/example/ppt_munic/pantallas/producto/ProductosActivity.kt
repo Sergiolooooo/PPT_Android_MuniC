@@ -10,11 +10,12 @@ import com.example.ppt_munic.R
 import com.example.ppt_munic.data.Productos.ProductosAdapter
 import com.example.ppt_munic.data.Productos.ProductosRespuesta
 import com.example.ppt_munic.network.RetrofitClient
+import com.example.ppt_munic.pantallas.menu.DrawerActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class ProductosActivity : AppCompatActivity() {
+class ProductosActivity : DrawerActivity() {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: ProductosAdapter
