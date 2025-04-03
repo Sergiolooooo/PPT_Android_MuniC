@@ -7,6 +7,7 @@ import android.widget.Toast
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.example.ppt_munic.R
+import com.example.ppt_munic.pantallas.acercade.AcercaDeActivity
 import com.example.ppt_munic.pantallas.categoria.CategoriasActivity
 import com.example.ppt_munic.pantallas.noticia.NoticiasActivity
 import com.google.android.material.navigation.NavigationView
@@ -40,10 +41,14 @@ object DrawerManager {
                     activity.startActivity(intent)
                 }
                 R.id.nav_acerca -> {
-                    Toast.makeText(activity, "Acerca de", Toast.LENGTH_SHORT).show()
+                    val intent = Intent(activity, AcercaDeActivity::class.java)
+                    activity.startActivity(intent)
                 }
                 R.id.nav_voz -> {
                     Toast.makeText(activity, "Voz del Pueblo", Toast.LENGTH_SHORT).show()
+                }
+                R.id.nav_simart -> {
+                    Toast.makeText(activity, "SIMART", Toast.LENGTH_SHORT).show()
                 }
             }
 

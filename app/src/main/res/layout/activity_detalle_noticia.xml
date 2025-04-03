@@ -16,7 +16,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/contenedorSuperior"
             android:layout_width="match_parent"
-            android:layout_height="220dp"
+            android:layout_height="200dp"
             android:background="@drawable/bg_redondeado_abajo"
             android:elevation="10dp"
             android:padding="2dp"
@@ -104,7 +104,7 @@
                     android:id="@+id/tvFechaPublicacion"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Fecha"
+                    android:text="Fecha Publicación"
                     android:textColor="@color/blanco"
                     android:textSize="24sp"
                     android:textStyle="bold"

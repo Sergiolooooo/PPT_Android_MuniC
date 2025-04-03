@@ -33,7 +33,8 @@
                 app:tint="@color/blanco"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:layout_margin="12dp"
+                android:layout_margin="24dp"
+
                 />
 
             <TextView

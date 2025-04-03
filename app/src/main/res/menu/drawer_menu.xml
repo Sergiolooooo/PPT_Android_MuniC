@@ -23,5 +23,10 @@
         android:icon="@drawable/menu_voz"
         android:title="Voz del Pueblo"
         android:iconTint="@null" />
+    <item
+        android:id="@+id/nav_simart"
+        android:icon="@drawable/menu_preguntas"
+        android:title="SIMART"
+        android:iconTint="@null" />
 
 </menu>
