@@ -3,12 +3,13 @@ package com.example.ppt_munic.pantallas.producto
 import android.os.Bundle
 import android.util.Log
 import android.widget.ImageView
-import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ppt_munic.R
 import com.example.ppt_munic.data.Productos.ProductosAdapter
 import com.example.ppt_munic.data.Productos.ProductosRespuesta
+import com.example.ppt_munic.data.categoria.CategoriaSeleccionada
+import com.example.ppt_munic.pantallas.categoria.AsignarImagenCategoria
 import com.example.ppt_munic.network.RetrofitClient
 import com.example.ppt_munic.pantallas.menu.DrawerActivity
 import retrofit2.Call
@@ -21,33 +22,30 @@ class ProductosActivity : DrawerActivity() {
     private lateinit var adapter: ProductosAdapter
     private lateinit var btnCerrar: ImageView
     private lateinit var iconoComercio: ImageView
-    private var iconoResId: Int = R.drawable.ic_default // Valor por defecto
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_productos)
 
-        // Configurar RecyclerView
         recyclerView = findViewById(R.id.recyclerProductos)
         recyclerView.layoutManager = LinearLayoutManager(this)
         btnCerrar = findViewById(R.id.btn_cerrar)
-        iconoComercio = findViewById(R.id.iconoComercio) // 🔹 Referencia al icono del comercio
+        iconoComercio = findViewById(R.id.iconoComercio)
 
-        // Recibir el ID del comercio y el icono de la categoría desde el Intent
         val idComercio = intent.getIntExtra("id_comercio", 0)
-        iconoResId = intent.getIntExtra("iconoCategoria", R.drawable.ic_default) // 🔹 Recibe el ID del icono
+        val imagenBase64 = CategoriaSeleccionada.imagen // 🔹 Recuperar imagen base64
 
-        // 🔹 Asignar el icono al comercio en la parte superior
-        iconoComercio.setImageResource(iconoResId)
+        // 🔹 Cargar imagen base64
+        AsignarImagenCategoria.cargar(this, imagenBase64, iconoComercio)
 
-        // 🔹 Pasamos el ID del icono al adaptador de productos
-        adapter = ProductosAdapter(emptyList(), iconoResId)
+        // 🔹 Pasar imagen base64 al adapter
+        adapter = ProductosAdapter(emptyList(), imagenBase64)
         recyclerView.adapter = adapter
 
         obtenerProductos(idComercio)
 
         btnCerrar.setOnClickListener {
-            finish() // Cierra la actividad
+            finish()
         }
     }
 

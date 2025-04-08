@@ -7,10 +7,11 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ppt_munic.R
+import com.example.ppt_munic.pantallas.categoria.AsignarImagenCategoria
 
 class ProductosAdapter(
     private var productos: List<Producto>,
-    private val iconoCategoriaResId: Int // 🔹 Recibe el ID del icono de la categoría del comercio
+    private val imagenBase64: String?
 ) : RecyclerView.Adapter<ProductosAdapter.ProductoViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductoViewHolder {
@@ -24,11 +25,8 @@ class ProductosAdapter(
         holder.descripcion.text = producto.descripcion_producto
         holder.precio.text = "₡${producto.precio}"
 
-        // 🔹 Asignar el mismo icono de la categoría a la imagen del producto
-        holder.imagen.setImageResource(iconoCategoriaResId)
-
-        // 🔹 Si tienes otro `ImageView` para el icono de la categoría, también lo asignas
-        holder.iconoCategoria.setImageResource(iconoCategoriaResId)
+        // 🔹 Mostrar imagen dinámica usando Glide
+        AsignarImagenCategoria.cargar(holder.itemView.context, imagenBase64, holder.imagen)
     }
 
     override fun getItemCount(): Int = productos.size
@@ -42,7 +40,6 @@ class ProductosAdapter(
         val nombre: TextView = itemView.findViewById(R.id.tvNombreProducto)
         val descripcion: TextView = itemView.findViewById(R.id.tvDescripcionProducto)
         val precio: TextView = itemView.findViewById(R.id.tvPrecioProducto)
-        val imagen: ImageView = itemView.findViewById(R.id.imgProducto) // 🔹 Aquí va la imagen de la categoría
-        val iconoCategoria: ImageView = itemView.findViewById(R.id.imgProducto) // 🔹 Asegúrate de que este ID está en `item_producto.xml`
+        val imagen: ImageView = itemView.findViewById(R.id.imgProducto)
     }
 }

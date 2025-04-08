@@ -7,7 +7,6 @@ import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ppt_munic.R
@@ -16,11 +15,12 @@ import com.example.ppt_munic.pantallas.albumComercio.AlbumComercioActivity
 import com.example.ppt_munic.network.RetrofitClient
 import com.example.ppt_munic.pantallas.menu.DrawerActivity
 import com.example.ppt_munic.pantallas.producto.ProductosActivity
+import com.example.ppt_munic.pantallas.categoria.AsignarImagenCategoria
+import com.google.android.flexbox.FlexboxLayoutManager
+import com.google.android.flexbox.JustifyContent
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import com.google.android.flexbox.FlexboxLayoutManager
-import com.google.android.flexbox.JustifyContent
 
 class DetalleComercio : DrawerActivity() {
 
@@ -49,25 +49,25 @@ class DetalleComercio : DrawerActivity() {
             finish()
         }
 
-        // 🔹 Obtener datos del intent
+// 🔹 Obtener datos del intent
         val nombre = intent.getStringExtra("nombre") ?: "Sin nombre"
         val descripcion = intent.getStringExtra("descripcion") ?: "Sin descripción"
         val telefono = intent.getStringExtra("telefono")
         val videoUrl = intent.getStringExtra("video_youtube") ?: "Sin video"
         val urlGoogle = intent.getStringExtra("url_google") ?: "Sin enlace"
-        val iconoRes = intent.getIntExtra("iconoCategoria", R.drawable.ic_default)
+        val imagenBase64 = com.example.ppt_munic.data.categoria.CategoriaSeleccionada.imagen // ✅
         val comercioId = intent.getIntExtra("id_comercio", -1)
 
         Log.d("TEST_VIDEO", "URL de YouTube recibida: $videoUrl")
         Log.d("TEST_COMERCIO", "ID del comercio: $comercioId")
 
-        // 🔹 Asignar datos a los elementos de la UI
+// 🔹 Asignar datos a los elementos de la UI
         tvNombre.text = nombre
         tvDescripcion.text = descripcion
         tvTelefono.text = if (!telefono.isNullOrEmpty() && telefono != "null") "Teléfono: $telefono" else "Teléfono: No disponible"
 
-        // ✅ Corregido: Asignar icono directamente sin Glide
-        iconoComercio.setImageResource(iconoRes)
+// ✅ Mostrar imagen base64 usando Glide
+        AsignarImagenCategoria.cargar(this, imagenBase64, iconoComercio)
 
         // 🔹 Verificar y mostrar botón de Google Maps si la URL es válida
         if (isValidGoogleUrl(urlGoogle)) {
@@ -90,7 +90,7 @@ class DetalleComercio : DrawerActivity() {
 
             val intent = Intent(this, ProductosActivity::class.java)
             intent.putExtra("id_comercio", comercioId)
-            intent.putExtra("iconoCategoria", iconoRes)
+            // ⚠️ Aún podrías seguir usando iconoRes si lo necesitás en otras pantallas
             startActivity(intent)
         }
 
@@ -99,7 +99,6 @@ class DetalleComercio : DrawerActivity() {
 
             val intent = Intent(this, AlbumComercioActivity::class.java)
             intent.putExtra("id_comercio", comercioId)
-            intent.putExtra("iconoCategoria", iconoRes)
             startActivity(intent)
         }
     }
@@ -118,7 +117,6 @@ class DetalleComercio : DrawerActivity() {
                     withContext(Dispatchers.Main) {
                         val totalItems = redesSociales.size + if (videoUrl != "Sin video") 1 else 0
 
-                        // 🔹 Configurar diseño de RecyclerView con FlexboxLayoutManager
                         val flexboxLayoutManager = FlexboxLayoutManager(this@DetalleComercio)
                         flexboxLayoutManager.justifyContent = JustifyContent.CENTER
 

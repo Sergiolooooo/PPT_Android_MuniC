@@ -3,7 +3,6 @@ package com.example.ppt_munic.pantallas.albumComercio
 import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageView
-import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ppt_munic.R
@@ -15,6 +14,9 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.io.File
+import com.example.ppt_munic.data.categoria.CategoriaSeleccionada
+import com.example.ppt_munic.pantallas.categoria.AsignarImagenCategoria
+
 
 class AlbumComercioActivity : DrawerActivity() {
 
@@ -35,9 +37,8 @@ class AlbumComercioActivity : DrawerActivity() {
         recyclerAlbum.layoutManager = GridLayoutManager(this, 2)
 
         val idComercio = intent.getIntExtra("id_comercio", 0)
-        iconoResId = intent.getIntExtra("iconoCategoria", R.drawable.ic_default)
-        iconoComercio.setImageResource(iconoResId)
-
+        val imagenBase64 = CategoriaSeleccionada.imagen
+        AsignarImagenCategoria.cargar(this, imagenBase64, iconoComercio)
         adapter = AlbumComercioAdapter(mutableListOf()) { byteArray ->
             abrirImagenCompleta(byteArray)
         }

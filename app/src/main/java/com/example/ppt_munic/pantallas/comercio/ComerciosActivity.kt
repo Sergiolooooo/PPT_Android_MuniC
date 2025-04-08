@@ -8,8 +8,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ppt_munic.R
 import com.example.ppt_munic.data.comercio.ComercioAdapter
-import com.example.ppt_munic.data.categoria.AsignarIconos
+import com.example.ppt_munic.data.categoria.CategoriaSeleccionada
 import com.example.ppt_munic.network.RetrofitClient
+import com.example.ppt_munic.pantallas.categoria.AsignarImagenCategoria
 import com.example.ppt_munic.pantallas.menu.DrawerActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -36,27 +37,26 @@ class ComerciosActivity : DrawerActivity() {
         btnCerrar = findViewById(R.id.btn_cerrar)
 
         val categoria = intent.getStringExtra("categoria") ?: ""
+        val imagen = CategoriaSeleccionada.imagen // 🟢 Recuperar imagen guardada
 
-        // Asignar ícono y título
-        val iconoResId = AsignarIconos.obtenerIconoPorCategoria(categoria)
-        iconoCategoria.setImageResource(iconoResId)
+        AsignarImagenCategoria.cargar(this, imagen, iconoCategoria)
         tituloCategoria.text = categoria
 
         btnCerrar.setOnClickListener {
             finish()
         }
 
-        obtenerComerciosPorCategoria(categoria, iconoResId)
+        obtenerComerciosPorCategoria(categoria, imagen)
     }
 
-    private fun obtenerComerciosPorCategoria(categoria: String, iconoResId: Int) {
+    private fun obtenerComerciosPorCategoria(categoria: String, imagen: String?) {
         lifecycleScope.launch(Dispatchers.IO) {
             try {
                 val response = RetrofitClient.api.getComerciosByCategoria(categoria).execute()
                 if (response.isSuccessful) {
                     val comercios = response.body()?.data ?: emptyList()
                     withContext(Dispatchers.Main) {
-                        comercioAdapter = ComercioAdapter(comercios, iconoResId)
+                        comercioAdapter = ComercioAdapter(comercios, imagen)
                         recyclerView.adapter = comercioAdapter
                     }
                 }

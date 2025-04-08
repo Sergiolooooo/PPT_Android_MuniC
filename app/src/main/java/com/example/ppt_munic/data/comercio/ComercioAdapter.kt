@@ -8,11 +8,13 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ppt_munic.R
+import com.example.ppt_munic.data.categoria.CategoriaSeleccionada
+import com.example.ppt_munic.pantallas.categoria.AsignarImagenCategoria
 import com.example.ppt_munic.pantallas.comercio.DetalleComercio
 
 class ComercioAdapter(
     private val comercios: List<Comercio>,
-    private val iconoCategoriaResId: Int // 🔹 Cambiado de Drawable a Int (ID de recurso)
+    private val imagenBase64: String? // ✅ Imagen dinámica de la categoría
 ) : RecyclerView.Adapter<ComercioAdapter.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -32,10 +34,13 @@ class ComercioAdapter(
         holder.tvNombre.text = comercio.nombre
         holder.tvTelefono.text = comercio.telefono.toString()
 
-        // Asignar el icono de la categoría correctamente
-        holder.imgComercio.setImageResource(iconoCategoriaResId)
+        // Mostrar imagen de categoría para cada comercio
+        AsignarImagenCategoria.cargar(holder.itemView.context, imagenBase64, holder.imgComercio)
 
         holder.itemView.setOnClickListener {
+            // Guardar la imagen seleccionada
+            CategoriaSeleccionada.imagen = imagenBase64
+
             val intent = Intent(holder.itemView.context, DetalleComercio::class.java).apply {
                 putExtra("id_comercio", comercio.id)
                 putExtra("nombre", comercio.nombre)
@@ -43,13 +48,11 @@ class ComercioAdapter(
                 putExtra("url_google", comercio.google)
                 putExtra("telefono", comercio.telefono)
                 putExtra("video_youtube", comercio.videoYoutube)
-
-                // 🔹 Pasar el ID del recurso del icono a DetalleComercio
-                putExtra("iconoCategoria", iconoCategoriaResId)
             }
             holder.itemView.context.startActivity(intent)
         }
     }
+
 
     override fun getItemCount() = comercios.size
 }

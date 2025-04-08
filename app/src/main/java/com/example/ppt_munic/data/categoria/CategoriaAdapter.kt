@@ -8,6 +8,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ppt_munic.R
+import com.example.ppt_munic.pantallas.categoria.AsignarImagenCategoria
 import com.example.ppt_munic.pantallas.comercio.ComerciosActivity
 
 class CategoriaAdapter(
@@ -29,18 +30,19 @@ class CategoriaAdapter(
         val categoria = categorias[position]
         holder.tvCategoria.text = categoria.nombre
 
-        // Asignar icono usando la función de AsignarIconos
-        holder.iconoCategoria.setImageResource(AsignarIconos.obtenerIconoPorCategoria(categoria.nombre))
+        // Mostrar imagen base64 con Glide
+        AsignarImagenCategoria.cargar(holder.itemView.context, categoria.imagen, holder.iconoCategoria)
 
-        // Asegurar tamaño y escalado correcto del icono
         holder.iconoCategoria.layoutParams.width = 200
         holder.iconoCategoria.layoutParams.height = 200
         holder.iconoCategoria.scaleType = ImageView.ScaleType.FIT_CENTER
 
-        // Agregar listener de clic para abrir comercios filtrados por categoría
         holder.itemView.setOnClickListener {
+            // Guardar imagen en singleton (no usar Intent)
+            CategoriaSeleccionada.imagen = categoria.imagen
+
             val intent = Intent(holder.itemView.context, ComerciosActivity::class.java).apply {
-                putExtra("categoria", categoria.nombre)
+                putExtra("categoria", categoria.nombre) // Solo pasamos nombre
             }
             holder.itemView.context.startActivity(intent)
         }
