@@ -14,7 +14,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/contenedorSuperior"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="190dp"
             android:background="@drawable/bg_redondeado_abajo"
             android:elevation="10dp"
             android:padding="2dp"
@@ -45,12 +45,14 @@
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:background="@drawable/bg_categoria"
+                android:src="@drawable/menu_voz"
                 android:padding="4dp"
                 android:elevation="6dp"
                 app:layout_constraintTop_toBottomOf="@id/menu_icon"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginTop="10dp" />
+                android:layout_marginTop="5dp" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <ScrollView
@@ -69,6 +71,21 @@
                 android:padding="16dp"
                 android:background="@color/verde_fondo">
 
+                <!-- Título -->
+                <TextView
+                    android:id="@+id/titulo_incidencia"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Nombre de la Incidencia"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/blanco"
+                    android:fontFamily="@font/flamante_round_bold"
+                    android:gravity="center"
+                    android:textAlignment="center"
+                    android:layout_marginBottom="12dp"
+                    />
+
                 <EditText
                     android:id="@+id/etNombre"
                     android:layout_width="match_parent"
@@ -84,6 +101,7 @@
                     android:hint="Cédula"
                     android:inputType="number"
                     android:textColor="@color/marron_texto"
+                    android:layout_marginTop="2dp"
                     android:background="@drawable/bg_input" />
 
                 <EditText
@@ -93,15 +111,7 @@
                     android:hint="Teléfono"
                     android:inputType="phone"
                     android:textColor="@color/marron_texto"
-                    android:background="@drawable/bg_input" />
-
-                <EditText
-                    android:id="@+id/etIdIncidencia"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="ID Incidencia"
-                    android:inputType="number"
-                    android:textColor="@color/marron_texto"
+                    android:layout_marginTop="2dp"
                     android:background="@drawable/bg_input" />
 
                 <EditText
@@ -110,6 +120,7 @@
                     android:layout_height="wrap_content"
                     android:hint="Provincia"
                     android:textColor="@color/marron_texto"
+                    android:layout_marginTop="2dp"
                     android:background="@drawable/bg_input" />
 
                 <EditText
@@ -118,6 +129,7 @@
                     android:layout_height="wrap_content"
                     android:hint="Cantón"
                     android:textColor="@color/marron_texto"
+                    android:layout_marginTop="2dp"
                     android:background="@drawable/bg_input" />
 
                 <EditText
@@ -126,6 +138,7 @@
                     android:layout_height="wrap_content"
                     android:hint="Distrito"
                     android:textColor="@color/marron_texto"
+                    android:layout_marginTop="2dp"
                     android:background="@drawable/bg_input" />
 
                 <EditText
@@ -134,16 +147,21 @@
                     android:layout_height="wrap_content"
                     android:hint="Dirección exacta"
                     android:textColor="@color/marron_texto"
+                    android:layout_marginTop="2dp"
                     android:background="@drawable/bg_input" />
 
-                <ImageView
+                <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/imgPreview"
-                    android:layout_width="120dp"
-                    android:layout_height="120dp"
+                    android:layout_width="160dp"
+                    android:layout_height="160dp"
                     android:layout_gravity="center"
                     android:layout_marginTop="12dp"
-                    android:background="@drawable/bg_categoria"
-                    android:scaleType="centerCrop" />
+                    android:scaleType="centerCrop"
+                    android:adjustViewBounds="true"
+                    android:background="@color/blanco"
+                    app:shapeAppearanceOverlay="@style/CustomRoundedImage"/>
+
+
 
                 <Button
                     android:id="@+id/btnSeleccionarImagen"
@@ -158,7 +176,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Enviar Incidencia"
-                    android:layout_marginTop="12dp"
+                    android:layout_marginTop="10dp"
                     android:backgroundTint="@color/marron_texto"
                     android:textColor="@color/blanco" />
 

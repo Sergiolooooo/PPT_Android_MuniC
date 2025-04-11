@@ -13,9 +13,11 @@ import com.example.ppt_munic.pantallas.categoria.AsignarImagenCategoria
 import com.example.ppt_munic.pantallas.comercio.DetalleComercio
 
 class ComercioAdapter(
-    private val comercios: List<Comercio>,
-    private val imagenBase64: String? // ✅ Imagen dinámica de la categoría
+    private var comercios: List<Comercio>,
+    private val imagenBase64: String?
 ) : RecyclerView.Adapter<ComercioAdapter.ViewHolder>() {
+
+    private var listaCompleta: List<Comercio> = comercios.toList()
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val imgComercio: ImageView = view.findViewById(R.id.imgComercio)
@@ -34,13 +36,10 @@ class ComercioAdapter(
         holder.tvNombre.text = comercio.nombre
         holder.tvTelefono.text = comercio.telefono.toString()
 
-        // Mostrar imagen de categoría para cada comercio
         AsignarImagenCategoria.cargar(holder.itemView.context, imagenBase64, holder.imgComercio)
 
         holder.itemView.setOnClickListener {
-            // Guardar la imagen seleccionada
             CategoriaSeleccionada.imagen = imagenBase64
-
             val intent = Intent(holder.itemView.context, DetalleComercio::class.java).apply {
                 putExtra("id_comercio", comercio.id)
                 putExtra("nombre", comercio.nombre)
@@ -53,6 +52,29 @@ class ComercioAdapter(
         }
     }
 
-
     override fun getItemCount() = comercios.size
+
+    fun actualizarLista(nuevaLista: List<Comercio>) {
+        comercios = nuevaLista
+        notifyDataSetChanged()
+    }
+
+    fun setListaCompleta(original: List<Comercio>) {
+        listaCompleta = original
+        actualizarLista(original)
+    }
+
+    fun filtrar(query: String) {
+        val filtro = query.lowercase().trim()
+        if (filtro.isEmpty()) {
+            actualizarLista(listaCompleta)
+        } else {
+            val filtrada = listaCompleta.filter {
+                it.nombre.lowercase().contains(filtro) ||
+                        it.descripcion.lowercase().contains(filtro) ||
+                        it.telefono.toString().contains(filtro)
+            }
+            actualizarLista(filtrada)
+        }
+    }
 }

@@ -10,7 +10,6 @@
         android:id="@+id/imgIcono"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:src="@drawable/ic_default"
         android:scaleType="fitCenter"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"

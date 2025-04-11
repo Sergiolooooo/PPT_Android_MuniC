@@ -1,5 +1,6 @@
 package com.example.ppt_munic.network
 
+import com.example.ppt_munic.data.Listado_Incidencias.ListadoIncidenciaRespuesta
 import com.example.ppt_munic.data.Productos.ProductosRespuesta
 import com.example.ppt_munic.data.Redes_Sociales.RedesRespuesta
 import com.example.ppt_munic.data.albumComercio.AlbumComercioRespuesta
@@ -49,5 +50,9 @@ interface ApiService {
         @Part("direccion_exacta") direccionExacta: RequestBody,
         @Part imagen: MultipartBody.Part
     ): Call<IncidenciaRespuesta>
+
+    @GET("api/listadoIncidencias")
+    fun getListadoIncidencias(): Call<ListadoIncidenciaRespuesta>
+
 
 }

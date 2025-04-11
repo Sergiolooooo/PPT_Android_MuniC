@@ -38,7 +38,13 @@ class EnviarIncidencia {
         val distritoBody = distrito.toRequestBody("multipart/form-data".toMediaTypeOrNull())
         val direccionBody = direccion.toRequestBody("multipart/form-data".toMediaTypeOrNull())
 
-        val imagenRequest = imagenFile.asRequestBody("image/*".toMediaTypeOrNull())
+        val mimeType = when (imagenFile.extension.lowercase()) {
+            "jpg", "jpeg" -> "image/jpeg"
+            "png" -> "image/png"
+            else -> "image/jpeg" // por defecto si no se reconoce
+        }
+        val imagenRequest = imagenFile.asRequestBody(mimeType.toMediaTypeOrNull())
+
         val imagenPart = MultipartBody.Part.createFormData("imagen", imagenFile.name, imagenRequest)
 
         val call = apiService.postIncidencia(

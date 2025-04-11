@@ -14,6 +14,8 @@ class ProductosAdapter(
     private val imagenBase64: String?
 ) : RecyclerView.Adapter<ProductosAdapter.ProductoViewHolder>() {
 
+    private var listaCompleta: List<Producto> = productos.toList()
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductoViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_producto, parent, false)
         return ProductoViewHolder(view)
@@ -25,7 +27,6 @@ class ProductosAdapter(
         holder.descripcion.text = producto.descripcion_producto
         holder.precio.text = "₡${producto.precio}"
 
-        // 🔹 Mostrar imagen dinámica usando Glide
         AsignarImagenCategoria.cargar(holder.itemView.context, imagenBase64, holder.imagen)
     }
 
@@ -34,6 +35,25 @@ class ProductosAdapter(
     fun actualizarLista(nuevosProductos: List<Producto>) {
         productos = nuevosProductos
         notifyDataSetChanged()
+    }
+
+    fun setListaCompleta(original: List<Producto>) {
+        listaCompleta = original
+        actualizarLista(original)
+    }
+
+    fun filtrar(query: String) {
+        val filtro = query.lowercase().trim()
+        if (filtro.isEmpty()) {
+            actualizarLista(listaCompleta)
+        } else {
+            val filtrada = listaCompleta.filter {
+                it.nombre_producto.lowercase().contains(filtro) ||
+                        it.descripcion_producto.lowercase().contains(filtro) ||
+                        it.precio.toString().contains(filtro)
+            }
+            actualizarLista(filtrada)
+        }
     }
 
     class ProductoViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

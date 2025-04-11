@@ -15,6 +15,8 @@ class CategoriaAdapter(
     private var categorias: List<Categoria>
 ) : RecyclerView.Adapter<CategoriaAdapter.ViewHolder>() {
 
+    private var listaCompleta: List<Categoria> = categorias.toList()
+
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val tvCategoria: TextView = view.findViewById(R.id.tvCategoria)
         val iconoCategoria: ImageView = view.findViewById(R.id.iconoCategoria)
@@ -30,7 +32,6 @@ class CategoriaAdapter(
         val categoria = categorias[position]
         holder.tvCategoria.text = categoria.nombre
 
-        // Mostrar imagen base64 con Glide
         AsignarImagenCategoria.cargar(holder.itemView.context, categoria.imagen, holder.iconoCategoria)
 
         holder.iconoCategoria.layoutParams.width = 200
@@ -38,11 +39,9 @@ class CategoriaAdapter(
         holder.iconoCategoria.scaleType = ImageView.ScaleType.FIT_CENTER
 
         holder.itemView.setOnClickListener {
-            // Guardar imagen en singleton (no usar Intent)
             CategoriaSeleccionada.imagen = categoria.imagen
-
             val intent = Intent(holder.itemView.context, ComerciosActivity::class.java).apply {
-                putExtra("categoria", categoria.nombre) // Solo pasamos nombre
+                putExtra("categoria", categoria.nombre)
             }
             holder.itemView.context.startActivity(intent)
         }
@@ -53,5 +52,22 @@ class CategoriaAdapter(
     fun actualizarLista(nuevaLista: List<Categoria>) {
         categorias = nuevaLista
         notifyDataSetChanged()
+    }
+
+    fun setListaCompleta(original: List<Categoria>) {
+        listaCompleta = original
+        actualizarLista(original)
+    }
+
+    fun filtrar(query: String) {
+        val filtro = query.lowercase().trim()
+        if (filtro.isEmpty()) {
+            actualizarLista(listaCompleta)
+        } else {
+            val filtrada = listaCompleta.filter {
+                it.nombre.lowercase().contains(filtro)
+            }
+            actualizarLista(filtrada)
+        }
     }
 }

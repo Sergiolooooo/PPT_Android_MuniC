@@ -11,13 +11,6 @@
         android:icon="@drawable/menu_noticias"
         android:title="Noticias"
         android:iconTint="@null" />
-
-    <item
-        android:id="@+id/nav_acerca"
-        android:icon="@drawable/menu_acerca"
-        android:title="Acerca de"
-        android:iconTint="@null" />
-
     <item
         android:id="@+id/nav_voz"
         android:icon="@drawable/menu_voz"
@@ -27,6 +20,11 @@
         android:id="@+id/nav_simart"
         android:icon="@drawable/menu_preguntas"
         android:title="SIMART"
+        android:iconTint="@null" />
+    <item
+        android:id="@+id/nav_acerca"
+        android:icon="@drawable/menu_acerca"
+        android:title="Acerca de"
         android:iconTint="@null" />
 
 </menu>

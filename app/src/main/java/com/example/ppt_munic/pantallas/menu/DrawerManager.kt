@@ -9,7 +9,7 @@ import androidx.drawerlayout.widget.DrawerLayout
 import com.example.ppt_munic.R
 import com.example.ppt_munic.pantallas.acercade.AcercaDeActivity
 import com.example.ppt_munic.pantallas.categoria.CategoriasActivity
-import com.example.ppt_munic.pantallas.incidencia.IncidenciaActivity
+import com.example.ppt_munic.pantallas.listadoIncidencia.ListadoIncidenciasActivity
 import com.example.ppt_munic.pantallas.noticia.NoticiasActivity
 import com.google.android.material.navigation.NavigationView
 
@@ -41,16 +41,16 @@ object DrawerManager {
                     val intent = Intent(activity, NoticiasActivity::class.java)
                     activity.startActivity(intent)
                 }
-                R.id.nav_acerca -> {
-                    val intent = Intent(activity, AcercaDeActivity::class.java)
-                    activity.startActivity(intent)
-                }
                 R.id.nav_voz -> {
-                    val intent = Intent(activity, IncidenciaActivity::class.java)
+                    val intent = Intent(activity, ListadoIncidenciasActivity::class.java)
                     activity.startActivity(intent)
                 }
                 R.id.nav_simart -> {
                     Toast.makeText(activity, "SIMART", Toast.LENGTH_SHORT).show()
+                }
+                R.id.nav_acerca -> {
+                    val intent = Intent(activity, AcercaDeActivity::class.java)
+                    activity.startActivity(intent)
                 }
             }
 

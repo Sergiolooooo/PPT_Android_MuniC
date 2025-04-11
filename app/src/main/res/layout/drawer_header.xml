@@ -35,9 +35,9 @@
     <!-- Ícono grande abajo -->
     <ImageView
         android:id="@+id/drawer_logo_bottom"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:src="@drawable/ic_default"
+        android:layout_width="170dp"
+        android:layout_height="170dp"
+        android:src="@drawable/tenori_icon"
         android:contentDescription="Logo grande"
         app:layout_constraintTop_toBottomOf="@id/close_drawer"
         app:layout_constraintStart_toStartOf="parent"

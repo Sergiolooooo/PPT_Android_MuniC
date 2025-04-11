@@ -70,6 +70,20 @@
         <activity android:name=".pantallas.incidencia.IncidenciaActivity"
             android:exported="false"
             android:theme="@style/Theme.PPT_MuniC"/>
+        <activity android:name=".pantallas.listadoIncidencia.ListadoIncidenciasActivity"
+            android:exported="false"
+            android:theme="@style/Theme.PPT_MuniC"/>
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.example.ppt_munic.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
     </application>
 
 </manifest>
