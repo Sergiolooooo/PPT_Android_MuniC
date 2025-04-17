@@ -45,7 +45,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <!-- Ícono -->
+            <!-- Ícono decorativo -->
             <ImageView
                 android:id="@+id/iconoComercio"
                 android:layout_width="100dp"
@@ -81,42 +81,29 @@
                     android:id="@+id/tvNombre"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Título de la noticia"
+                    android:text="Nombre del evento"
                     android:textColor="@color/blanco"
                     android:textSize="24sp"
                     android:textStyle="bold"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="16dp" />
 
-                <!-- Contenido -->
+                <!-- Descripción -->
                 <TextView
                     android:id="@+id/tvDescripcion"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Aquí va el contenido completo de la noticia..."
+                    android:text="Descripción completa del evento..."
                     android:textColor="@color/blanco"
                     android:textSize="18sp"
                     android:padding="14dp"
                     android:textAlignment="center" />
 
-                <com.google.android.material.imageview.ShapeableImageView
-                    android:id="@+id/imgPreview"
-                    android:layout_width="200dp"
-                    android:layout_height="250dp"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="12dp"
-                    android:scaleType="centerCrop"
-                    android:adjustViewBounds="true"
-                    android:background="@color/blanco"
-                    app:shapeAppearanceOverlay="@style/CustomRoundedImage" />
-
-
-                <!-- Texto fecha -->
+                <!-- Texto Fecha -->
                 <TextView
-                    android:id="@+id/tvFechaPublicacion"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Fecha Publicación"
+                    android:text="Fecha del Evento"
                     android:textColor="@color/blanco"
                     android:textSize="24sp"
                     android:textStyle="bold"
@@ -128,13 +115,33 @@
                     android:id="@+id/tvFecha"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Publicado: 2025-03-28"
+                    android:text="2025-04-30"
                     android:textColor="@color/blanco"
                     android:textSize="18sp"
-                    android:layout_marginTop="12dp"
+                    android:layout_marginTop="6dp"
                     android:layout_gravity="center_horizontal" />
 
+                <!-- Texto Lugar -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Lugar del Evento"
+                    android:textColor="@color/blanco"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="14dp"
+                    android:layout_gravity="center_horizontal" />
 
+                <!-- Lugar -->
+                <TextView
+                    android:id="@+id/tvLugar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Salón Comunal de... "
+                    android:textColor="@color/blanco"
+                    android:textSize="18sp"
+                    android:layout_marginTop="6dp"
+                    android:layout_gravity="center_horizontal" />
             </LinearLayout>
         </ScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,4 +1,4 @@
-package com.example.ppt_munic.ui.noticias
+package com.example.ppt_munic.data.noticias
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,12 +7,15 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ppt_munic.R
-import com.example.ppt_munic.data.noticias.Noticia
+import com.example.ppt_munic.pantallas.noticia.IconosNoticia
+
 
 class NoticiasAdapter(
-    private val noticias: MutableList<Noticia>,
+    private var noticias: List<Noticia>,
     private val onClick: (Noticia) -> Unit
 ) : RecyclerView.Adapter<NoticiasAdapter.NoticiaViewHolder>() {
+
+    private var listaCompleta: List<Noticia> = noticias.toList()
 
     inner class NoticiaViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val titulo: TextView = itemView.findViewById(R.id.txtTitulo)
@@ -22,9 +25,12 @@ class NoticiasAdapter(
         fun bind(noticia: Noticia) {
             titulo.text = noticia.titulo
             fecha.text = noticia.fecha_publicacion.take(10)
-            icono.setImageResource(R.drawable.ic_default)
+            icono.setImageResource(IconosNoticia.iconoNoticia)
 
-            itemView.setOnClickListener { onClick(noticia) }
+            itemView.setOnClickListener {
+                NoticiaCache.cache[noticia.id_noticia] = noticia
+                onClick(noticia)
+            }
         }
     }
 
@@ -40,8 +46,25 @@ class NoticiasAdapter(
     override fun getItemCount(): Int = noticias.size
 
     fun actualizarLista(nuevaLista: List<Noticia>) {
-        noticias.clear()
-        noticias.addAll(nuevaLista)
+        noticias = nuevaLista
         notifyDataSetChanged()
+    }
+
+    fun setListaCompleta(original: List<Noticia>) {
+        listaCompleta = original
+        actualizarLista(original)
+    }
+
+    fun filtrar(query: String) {
+        val filtro = query.lowercase().trim()
+        if (filtro.isEmpty()) {
+            actualizarLista(listaCompleta)
+        } else {
+            val filtrada = listaCompleta.filter {
+                it.titulo.lowercase().contains(filtro) ||
+                        it.fecha_publicacion.lowercase().contains(filtro)
+            }
+            actualizarLista(filtrada)
+        }
     }
 }

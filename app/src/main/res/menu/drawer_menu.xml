@@ -17,6 +17,11 @@
         android:title="Voz del Pueblo"
         android:iconTint="@null" />
     <item
+        android:id="@+id/nav_eventos"
+        android:icon="@drawable/menu_eventos"
+        android:title="Eventos"
+        android:iconTint="@null" />
+    <item
         android:id="@+id/nav_simart"
         android:icon="@drawable/menu_preguntas"
         android:title="SIMART"

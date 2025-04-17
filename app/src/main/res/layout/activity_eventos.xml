@@ -35,7 +35,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <!-- Icono de eventos -->
+        <!-- Icono de categoría (EVENTOS) -->
         <ImageView
             android:id="@+id/iconoCategoria"
             android:layout_width="100dp"
@@ -48,12 +48,12 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
-        <!-- Título de la sección -->
+        <!-- Título central -->
         <TextView
             android:id="@+id/titulo_categoria"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="NOTICIAS"
+            android:text="EVENTOS"
             android:textSize="24sp"
             android:textStyle="bold"
             android:textColor="@color/marron_texto"
@@ -68,7 +68,7 @@
             android:id="@+id/search_bar"
             android:layout_width="0dp"
             android:layout_height="50dp"
-            android:hint="Buscar Noticias"
+            android:hint="Buscar Eventos"
             android:background="@drawable/search_background"
             android:textColorHint="@color/marron_texto"
             android:textColor="@color/marron_texto"
@@ -81,7 +81,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
-        <!-- RecyclerView de Eventos -->
+        <!-- Lista de eventos -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerEventos"
             android:layout_width="0dp"

@@ -5,5 +5,6 @@ data class Noticia(
     val titulo: String,
     val contenido: String,
     val fecha_publicacion: String,
-    val autor: String
+    val autor: String,
+    val imagen: String? // nueva propiedad base64
 )

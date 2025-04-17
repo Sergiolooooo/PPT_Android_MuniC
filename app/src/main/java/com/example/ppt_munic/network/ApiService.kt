@@ -54,5 +54,8 @@ interface ApiService {
     @GET("api/listadoIncidencias")
     fun getListadoIncidencias(): Call<ListadoIncidenciaRespuesta>
 
+    @GET("api/eventos")
+    fun getEventos(): Call<com.example.ppt_munic.data.evento.EventoRespuesta>
+
 
 }

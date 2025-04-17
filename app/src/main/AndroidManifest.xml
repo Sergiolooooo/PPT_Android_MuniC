@@ -73,6 +73,12 @@
         <activity android:name=".pantallas.listadoIncidencia.ListadoIncidenciasActivity"
             android:exported="false"
             android:theme="@style/Theme.PPT_MuniC"/>
+        <activity android:name=".pantallas.evento.EventosActivity"
+            android:exported="false"
+            android:theme="@style/Theme.PPT_MuniC"/>
+        <activity android:name=".pantallas.evento.DetalleEvento"
+            android:exported="false"
+            android:theme="@style/Theme.PPT_MuniC"/>
 
         <provider
             android:name="androidx.core.content.FileProvider"
