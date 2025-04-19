@@ -2,18 +2,20 @@ package com.example.ppt_munic.pantallas.albumComercio
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Base64
 import android.util.Log
 import android.widget.ImageView
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ppt_munic.R
+import com.example.ppt_munic.data.albumComercio.AlbumCache
 import com.example.ppt_munic.data.albumComercio.AlbumComercioAdapter
 import com.example.ppt_munic.data.albumComercio.AlbumComercioRespuesta
-import com.example.ppt_munic.data.albumComercio.AlbumCache
-import com.example.ppt_munic.pantallas.menu.DrawerActivity
+import com.example.ppt_munic.data.albumComercio.albumComercio
 import com.example.ppt_munic.data.categoria.CategoriaSeleccionada
-import com.example.ppt_munic.pantallas.categoria.AsignarImagenCategoria
 import com.example.ppt_munic.network.RetrofitClient
+import com.example.ppt_munic.pantallas.categoria.AsignarImagenCategoria
+import com.example.ppt_munic.pantallas.menu.DrawerActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -41,25 +43,22 @@ class AlbumComercioActivity : DrawerActivity() {
         val imagenBase64 = CategoriaSeleccionada.imagen
         AsignarImagenCategoria.cargar(this, imagenBase64, iconoComercio)
 
-        adapter = AlbumComercioAdapter(mutableListOf()) { byteArray ->
-            abrirImagenCompleta(byteArray)
+        adapter = AlbumComercioAdapter(mutableListOf()) { base64String ->
+            abrirImagenCompleta(base64String)
         }
         recyclerAlbum.adapter = adapter
 
-        // 1. Verificar si en el AlbumCache ya precargamos algo.
         val precargado = AlbumCache.cache[comercioId]
         if (precargado != null) {
-            // Sí, ya tenemos las imágenes en RAM
             adapter.actualizarLista(precargado)
             Log.d("ALBUM", "Cargado desde AlbumCache en memoria.")
         } else {
-            // 2. Si no existe en AlbumCache, llamar a la API
             obtenerAlbum(comercioId)
         }
 
+
         btnCerrar.setOnClickListener { finish() }
     }
-
 
     private fun obtenerAlbum(comercioId: Int) {
         RetrofitClient.api.getAlbumByComercio(comercioId).enqueue(object : Callback<AlbumComercioRespuesta> {
@@ -70,7 +69,8 @@ class AlbumComercioActivity : DrawerActivity() {
                 if (response.isSuccessful && response.body()?.success == true) {
                     val albumList = response.body()?.data?.toMutableList() ?: mutableListOf()
                     adapter.actualizarLista(albumList)
-                    Log.d("ALBUM", "Cargado desde la API (no había caché).")
+                    AlbumCache.cache[comercioId] = albumList
+                    Log.d("ALBUM", "Cargado desde la API y almacenado en caché.")
                 }
             }
 
@@ -80,12 +80,19 @@ class AlbumComercioActivity : DrawerActivity() {
         })
     }
 
-    private fun abrirImagenCompleta(byteArray: ByteArray) {
-        val file = File.createTempFile("imagen_temp", ".jpg", cacheDir)
-        file.writeBytes(byteArray)
+    private fun abrirImagenCompleta(base64String: String) {
+        try {
+            val base64Clean = base64String.substringAfter(",")
+            val imageBytes = Base64.decode(base64Clean, Base64.DEFAULT)
+            val file = File.createTempFile("imagen_temp", ".jpg", cacheDir)
+            file.writeBytes(imageBytes)
 
-        val intent = Intent(this, ImagenCompletaActivity::class.java)
-        intent.putExtra("pathImagen", file.absolutePath)
-        startActivity(intent)
+            val intent = Intent(this, ImagenCompletaActivity::class.java)
+            intent.putExtra("pathImagen", file.absolutePath)
+            startActivity(intent)
+        } catch (e: Exception) {
+            Log.e("ALBUM", "Error al abrir imagen completa: ${e.message}")
+        }
     }
+
 }

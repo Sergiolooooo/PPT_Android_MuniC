@@ -7,6 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ppt_munic.R
+import com.example.ppt_munic.data.evento.EventoCache
 import com.example.ppt_munic.pantallas.evento.IconosEvento
 
 class EventoAdapter(
@@ -17,24 +18,24 @@ class EventoAdapter(
     private var listaCompleta: List<Evento> = eventos.toList()
 
     inner class EventoViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val nombre: TextView = itemView.findViewById(R.id.txtTitulo)
+        private val titulo: TextView = itemView.findViewById(R.id.txtTitulo)
         private val fecha: TextView = itemView.findViewById(R.id.txtFecha)
         private val icono: ImageView = itemView.findViewById(R.id.imgIcono)
 
         fun bind(evento: Evento) {
-            nombre.text = evento.nombre
+            titulo.text = evento.nombre
             fecha.text = evento.fecha.take(10)
             icono.setImageResource(IconosEvento.iconoEvento)
 
             itemView.setOnClickListener {
+                EventoCache.cache[evento.id] = evento
                 onClick(evento)
             }
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EventoViewHolder {
-        val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_evento, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_evento, parent, false)
         return EventoViewHolder(view)
     }
 
@@ -61,7 +62,8 @@ class EventoAdapter(
         } else {
             val filtrada = listaCompleta.filter {
                 it.nombre.lowercase().contains(filtro) ||
-                        it.fecha.lowercase().contains(filtro)
+                        it.fecha.lowercase().contains(filtro) ||
+                        it.lugar.lowercase().contains(filtro)
             }
             actualizarLista(filtrada)
         }

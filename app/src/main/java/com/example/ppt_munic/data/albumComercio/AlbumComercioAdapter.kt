@@ -1,16 +1,17 @@
 package com.example.ppt_munic.data.albumComercio
 
-import android.graphics.BitmapFactory
+import android.util.Base64
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.ppt_munic.R
 
 class AlbumComercioAdapter(
     private var albumList: MutableList<albumComercio>,
-    private val onImageClick: (ByteArray) -> Unit
+    private val onImageClick: (String) -> Unit
 ) : RecyclerView.Adapter<AlbumComercioAdapter.AlbumViewHolder>() {
 
     inner class AlbumViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -25,13 +26,14 @@ class AlbumComercioAdapter(
 
     override fun onBindViewHolder(holder: AlbumViewHolder, position: Int) {
         val item = albumList[position]
-        val byteArray = item.datos_imagen.data.map { it.toByte() }.toByteArray()
 
-        val bitmap = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size)
-        holder.imageItem.setImageBitmap(bitmap)
+        Glide.with(holder.imageItem.context)
+            .load(item.imagen) // 👈 base64 completo
+            .placeholder(R.drawable.ic_default)
+            .into(holder.imageItem)
 
         holder.imageItem.setOnClickListener {
-            onImageClick(byteArray)
+            onImageClick(item.imagen) // 👈 Pasa string base64
         }
     }
 
