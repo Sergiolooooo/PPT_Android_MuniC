@@ -1,6 +1,5 @@
 package com.example.ppt_munic.data.albumComercio
 
-import android.util.Base64
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup

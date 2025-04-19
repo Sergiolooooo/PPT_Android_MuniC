@@ -3,7 +3,6 @@ package com.example.ppt_munic.pantallas.albumComercio
 import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.widget.ImageView
-import androidx.appcompat.app.AppCompatActivity
 import com.example.ppt_munic.R
 import com.example.ppt_munic.pantallas.menu.DrawerActivity
 import com.github.chrisbanes.photoview.PhotoView

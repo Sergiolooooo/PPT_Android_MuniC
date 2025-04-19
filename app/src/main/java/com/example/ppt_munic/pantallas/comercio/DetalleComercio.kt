@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.ppt_munic.R
 import com.example.ppt_munic.data.Redes_Sociales.RedesSocialesAdapter
 import com.example.ppt_munic.data.albumComercio.AlbumCache
-import com.example.ppt_munic.data.albumComercio.AlbumComercioRespuesta
 import com.example.ppt_munic.network.RetrofitClient
 import com.example.ppt_munic.pantallas.albumComercio.AlbumComercioActivity
 import com.example.ppt_munic.pantallas.categoria.AsignarImagenCategoria

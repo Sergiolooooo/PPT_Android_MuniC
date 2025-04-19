@@ -4,13 +4,11 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.ppt_munic.R
-import com.example.ppt_munic.data.noticias.Noticia
 import com.example.ppt_munic.data.noticias.NoticiaRespuesta
 import com.example.ppt_munic.data.noticias.NoticiasAdapter
 import com.example.ppt_munic.databinding.ActivityNoticiasBinding

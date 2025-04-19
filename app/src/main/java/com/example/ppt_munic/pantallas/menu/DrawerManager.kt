@@ -12,6 +12,7 @@ import com.example.ppt_munic.pantallas.categoria.CategoriasActivity
 import com.example.ppt_munic.pantallas.evento.EventosActivity
 import com.example.ppt_munic.pantallas.listadoIncidencia.ListadoIncidenciasActivity
 import com.example.ppt_munic.pantallas.noticia.NoticiasActivity
+import com.example.ppt_munic.pantallas.simart.SimartActivity
 import com.google.android.material.navigation.NavigationView
 
 object DrawerManager {
@@ -51,7 +52,8 @@ object DrawerManager {
                     activity.startActivity(intent)
                 }
                 R.id.nav_simart -> {
-                    Toast.makeText(activity, "SIMART", Toast.LENGTH_SHORT).show()
+                    val intent = Intent(activity, SimartActivity::class.java)
+                    activity.startActivity(intent)
                 }
                 R.id.nav_acerca -> {
                     val intent = Intent(activity, AcercaDeActivity::class.java)

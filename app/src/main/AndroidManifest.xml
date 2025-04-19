@@ -79,6 +79,9 @@
         <activity android:name=".pantallas.evento.DetalleEvento"
             android:exported="false"
             android:theme="@style/Theme.PPT_MuniC"/>
+        <activity android:name=".pantallas.simart.SimartActivity"
+            android:exported="false"
+            android:theme="@style/Theme.PPT_MuniC"/>
 
         <provider
             android:name="androidx.core.content.FileProvider"

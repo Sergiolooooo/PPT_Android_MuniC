@@ -10,7 +10,6 @@ import com.bumptech.glide.Glide
 import com.example.ppt_munic.R
 import com.example.ppt_munic.data.noticias.NoticiaCache
 import com.example.ppt_munic.pantallas.menu.DrawerActivity
-import com.example.ppt_munic.pantallas.noticia.IconosNoticia
 import com.google.android.material.imageview.ShapeableImageView
 import java.io.File
 import java.io.FileOutputStream

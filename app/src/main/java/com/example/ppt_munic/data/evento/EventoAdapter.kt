@@ -7,7 +7,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ppt_munic.R
-import com.example.ppt_munic.data.evento.EventoCache
 import com.example.ppt_munic.pantallas.evento.IconosEvento
 
 class EventoAdapter(

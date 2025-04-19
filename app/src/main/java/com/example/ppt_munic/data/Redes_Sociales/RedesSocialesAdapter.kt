@@ -35,7 +35,8 @@ class RedesSocialesAdapter(
 
             when (item.nombre_red_social.lowercase()) {
                 "facebook" -> holder.imgRedSocial.setImageResource(R.drawable.ic_facebook)
-                "twitter" -> holder.imgRedSocial.setImageResource(R.drawable.ic_twitter)
+                "twitter" -> holder.imgRedSocial.setImageResource(R.drawable.ic_twitter_x)
+                "x" -> holder.imgRedSocial.setImageResource(R.drawable.ic_twitter_x)
                 "instagram" -> holder.imgRedSocial.setImageResource(R.drawable.ic_instagram)
                 "whatsapp" -> holder.imgRedSocial.setImageResource(R.drawable.ic_whatsapp)
                 else -> holder.imgRedSocial.setImageResource(R.drawable.ic_default)
