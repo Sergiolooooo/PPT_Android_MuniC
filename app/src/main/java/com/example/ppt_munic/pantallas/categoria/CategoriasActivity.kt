@@ -3,7 +3,6 @@ package com.example.ppt_munic.pantallas.categoria
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.widget.EditText
 import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
@@ -46,13 +45,11 @@ class CategoriasActivity : DrawerActivity() {
                     val categorias = response.body()?.data ?: emptyList()
                     categoriaAdapter.setListaCompleta(categorias)
                 } else {
-                    Log.e("API_ERROR", "Error en la respuesta: ${response.code()}")
                     Toast.makeText(this@CategoriasActivity, "Error al obtener datos", Toast.LENGTH_LONG).show()
                 }
             }
 
             override fun onFailure(call: Call<CategoriaRespuesta>, t: Throwable) {
-                Log.e("API_ERROR", "Fallo en la llamada: ${t.message}")
                 Toast.makeText(this@CategoriasActivity, "No se pudo conectar con el servidor", Toast.LENGTH_LONG).show()
             }
         })

@@ -1,4 +1,4 @@
-package com.example.ppt_munic.data.Productos
+package com.example.ppt_munic.data.productos
 
 data class Producto(
     val id_producto: Int,

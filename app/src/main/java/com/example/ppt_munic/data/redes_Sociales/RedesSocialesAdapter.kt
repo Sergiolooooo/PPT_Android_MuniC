@@ -1,9 +1,8 @@
-package com.example.ppt_munic.data.Redes_Sociales
+package com.example.ppt_munic.data.redes_Sociales
 
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -31,8 +30,6 @@ class RedesSocialesAdapter(
         val item = if (position < redesSociales.size) redesSociales[position] else null
 
         if (item != null) {
-            Log.d("BIND", "Asignando red social: ${item.nombre_red_social}")
-
             when (item.nombre_red_social.lowercase()) {
                 "facebook" -> holder.imgRedSocial.setImageResource(R.drawable.ic_facebook)
                 "twitter" -> holder.imgRedSocial.setImageResource(R.drawable.ic_twitter_x)
@@ -49,8 +46,6 @@ class RedesSocialesAdapter(
                 context.startActivity(intent)
             }
         } else if (!youtubeUrl.isNullOrEmpty()) {
-            Log.d("BIND", "Agregando YouTube")
-
             holder.imgRedSocial.setImageResource(R.drawable.ic_youtubess)
             holder.imgRedSocial.layoutParams.width = 150
             holder.imgRedSocial.layoutParams.height = 150
@@ -61,11 +56,7 @@ class RedesSocialesAdapter(
         }
     }
 
-
-
     override fun getItemCount(): Int {
-        Log.d("ADAPTER", "Cantidad de redes + YouTube: ${redesSociales.size + if (!youtubeUrl.isNullOrEmpty()) 1 else 0}")
         return redesSociales.size + if (!youtubeUrl.isNullOrEmpty()) 1 else 0
     }
-
 }

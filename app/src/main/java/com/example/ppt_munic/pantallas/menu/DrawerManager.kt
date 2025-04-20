@@ -3,7 +3,6 @@ package com.example.ppt_munic.pantallas.menu
 import android.app.Activity
 import android.content.Intent
 import android.widget.ImageView
-import android.widget.Toast
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.example.ppt_munic.R

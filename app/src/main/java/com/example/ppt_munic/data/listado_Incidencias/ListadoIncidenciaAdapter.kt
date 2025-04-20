@@ -1,4 +1,4 @@
-package com.example.ppt_munic.data.Listado_Incidencias
+package com.example.ppt_munic.data.listado_Incidencias
 
 import android.view.LayoutInflater
 import android.view.View

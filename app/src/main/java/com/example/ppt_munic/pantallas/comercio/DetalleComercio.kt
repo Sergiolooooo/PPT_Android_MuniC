@@ -3,14 +3,13 @@ package com.example.ppt_munic.pantallas.comercio
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ppt_munic.R
-import com.example.ppt_munic.data.Redes_Sociales.RedesSocialesAdapter
+import com.example.ppt_munic.data.redes_Sociales.RedesSocialesAdapter
 import com.example.ppt_munic.data.albumComercio.AlbumCache
 import com.example.ppt_munic.network.RetrofitClient
 import com.example.ppt_munic.pantallas.albumComercio.AlbumComercioActivity
@@ -47,7 +46,6 @@ class DetalleComercio : DrawerActivity() {
         btnAlbum = findViewById(R.id.btnAlbum)
 
         btnCerrar.setOnClickListener {
-            Log.d("DetalleComercio", "Botón cerrar presionado")
             finish()
         }
 
@@ -104,12 +102,9 @@ class DetalleComercio : DrawerActivity() {
                 if (response.isSuccessful && response.body()?.success == true) {
                     val albumList = response.body()?.data ?: emptyList()
                     AlbumCache.cache[comercioId] = albumList
-                    Log.d("ALBUM_CACHE", "Precargado ${albumList.size} imágenes para comercio $comercioId")
-                } else {
-                    Log.e("ALBUM_CACHE", "Error al precargar: ${response.code()}")
                 }
-            } catch (e: Exception) {
-                Log.e("ALBUM_CACHE", "Fallo precarga: ${e.message}")
+            } catch (_: Exception) {
+                // Error silenciado en release
             }
         }
     }
@@ -131,21 +126,16 @@ class DetalleComercio : DrawerActivity() {
                         )
                         rvRedesSociales.adapter?.notifyDataSetChanged()
                     }
-                } else {
-                    Log.e("API_ERROR", "Error en respuesta: ${response.errorBody()?.string()}")
                 }
-            } catch (e: Exception) {
-                Log.e("API_ERROR", "Error en la llamada: ${e.message}")
+            } catch (_: Exception) {
+                // Error silenciado en release
             }
         }
     }
 
-    // LIMPIA AL SALIR DE DETALLECOMERCIO
     override fun onDestroy() {
         super.onDestroy()
-        // Limpia caché de este comercio
         AlbumCache.cache.remove(comercioId)
-        Log.d("ALBUM_CACHE", "Cache en memoria eliminado para comercio $comercioId")
     }
 
     private fun isValidGoogleUrl(url: String): Boolean {

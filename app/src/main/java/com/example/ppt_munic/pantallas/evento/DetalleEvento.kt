@@ -3,7 +3,6 @@ package com.example.ppt_munic.pantallas.evento
 import android.content.Intent
 import android.os.Bundle
 import android.util.Base64
-import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
@@ -28,7 +27,6 @@ class DetalleEvento : DrawerActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Log.d("DetalleEvento", "✅ Activity lanzada")
         setContentView(R.layout.activity_detalle_evento)
 
         btnCerrar = findViewById(R.id.btn_cerrar)
@@ -68,8 +66,8 @@ class DetalleEvento : DrawerActivity() {
                         val intent = Intent(this, ImagenCompletaActivity::class.java)
                         intent.putExtra("pathImagen", tempFile.absolutePath)
                         startActivity(intent)
-                    } catch (e: Exception) {
-                        Log.e("DetalleEvento", "Error al mostrar imagen: ${e.message}")
+                    } catch (_: Exception) {
+                        // Error silenciado en release
                     }
                 }
             } else {
@@ -77,7 +75,6 @@ class DetalleEvento : DrawerActivity() {
             }
 
         } else {
-            Log.e("DetalleEvento", "No se encontró el evento en caché. Cerrando.")
             finish()
         }
 

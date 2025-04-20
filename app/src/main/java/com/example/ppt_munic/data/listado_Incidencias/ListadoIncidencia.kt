@@ -1,4 +1,4 @@
-package com.example.ppt_munic.data.Listado_Incidencias
+package com.example.ppt_munic.data.listado_Incidencias
 
 data class ListadoIncidencia (
     val id_incidencia: Int,

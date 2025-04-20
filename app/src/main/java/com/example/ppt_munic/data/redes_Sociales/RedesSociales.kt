@@ -1,4 +1,4 @@
-package com.example.ppt_munic.data.Redes_Sociales
+package com.example.ppt_munic.data.redes_Sociales
 
 data class RedesSociales(
     val id_red_social: Int,

@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
@@ -12,9 +11,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.lifecycle.lifecycleScope
 import com.example.ppt_munic.R
-import com.example.ppt_munic.data.Listado_Incidencias.ListadoIncidencia
-import com.example.ppt_munic.data.Listado_Incidencias.ListadoIncidenciaAdapter
-import com.example.ppt_munic.data.Listado_Incidencias.ListadoIncidenciaRespuesta
+import com.example.ppt_munic.data.listado_Incidencias.ListadoIncidencia
+import com.example.ppt_munic.data.listado_Incidencias.ListadoIncidenciaAdapter
 import com.example.ppt_munic.network.RetrofitClient
 import com.example.ppt_munic.pantallas.incidencia.IncidenciaActivity
 import com.example.ppt_munic.pantallas.menu.DrawerActivity
@@ -75,12 +73,10 @@ class ListadoIncidenciasActivity : DrawerActivity() {
                         })
                     }
                 } else {
-                    Log.e("API", "Respuesta inválida")
+                    // Error silenciado en release
                 }
-            } catch (e: Exception) {
-                withContext(Dispatchers.Main) {
-                    Log.e("API_ERROR", "Error en la llamada: ${e.message}")
-                }
+            } catch (_: Exception) {
+                // Error silenciado en release
             }
         }
     }

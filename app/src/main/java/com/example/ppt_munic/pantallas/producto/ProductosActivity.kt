@@ -3,14 +3,13 @@ package com.example.ppt_munic.pantallas.producto
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.widget.EditText
 import android.widget.ImageView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ppt_munic.R
-import com.example.ppt_munic.data.Productos.ProductosAdapter
-import com.example.ppt_munic.data.Productos.ProductosRespuesta
+import com.example.ppt_munic.data.productos.ProductosAdapter
+import com.example.ppt_munic.data.productos.ProductosRespuesta
 import com.example.ppt_munic.data.categoria.CategoriaSeleccionada
 import com.example.ppt_munic.network.RetrofitClient
 import com.example.ppt_munic.pantallas.categoria.AsignarImagenCategoria
@@ -74,12 +73,12 @@ class ProductosActivity : DrawerActivity() {
                         adapter.setListaCompleta(productosRespuesta.data)
                     }
                 } else {
-                    Log.e("ProductosActivity", "Error en la respuesta: Código HTTP ${response.code()}")
+                    // Error silenciado en release
                 }
             }
 
             override fun onFailure(call: Call<ProductosRespuesta>, t: Throwable) {
-                Log.e("ProductosActivity", "Error en la API: ${t.message}")
+                // Error silenciado en release
             }
         })
     }

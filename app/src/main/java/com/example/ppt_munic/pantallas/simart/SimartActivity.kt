@@ -19,7 +19,6 @@ class SimartActivity : DrawerActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Log.d("SimartActivity", "Pantalla Simart lanzada")
         setContentView(R.layout.activity_simart)
 
         // Vincular vistas

@@ -3,7 +3,6 @@ package com.example.ppt_munic.pantallas.albumComercio
 import android.content.Intent
 import android.os.Bundle
 import android.util.Base64
-import android.util.Log
 import android.widget.ImageView
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -11,7 +10,6 @@ import com.example.ppt_munic.R
 import com.example.ppt_munic.data.albumComercio.AlbumCache
 import com.example.ppt_munic.data.albumComercio.AlbumComercioAdapter
 import com.example.ppt_munic.data.albumComercio.AlbumComercioRespuesta
-import com.example.ppt_munic.data.albumComercio.albumComercio
 import com.example.ppt_munic.data.categoria.CategoriaSeleccionada
 import com.example.ppt_munic.network.RetrofitClient
 import com.example.ppt_munic.pantallas.categoria.AsignarImagenCategoria
@@ -51,11 +49,9 @@ class AlbumComercioActivity : DrawerActivity() {
         val precargado = AlbumCache.cache[comercioId]
         if (precargado != null) {
             adapter.actualizarLista(precargado)
-            Log.d("ALBUM", "Cargado desde AlbumCache en memoria.")
         } else {
             obtenerAlbum(comercioId)
         }
-
 
         btnCerrar.setOnClickListener { finish() }
     }
@@ -70,12 +66,11 @@ class AlbumComercioActivity : DrawerActivity() {
                     val albumList = response.body()?.data?.toMutableList() ?: mutableListOf()
                     adapter.actualizarLista(albumList)
                     AlbumCache.cache[comercioId] = albumList
-                    Log.d("ALBUM", "Cargado desde la API y almacenado en caché.")
                 }
             }
 
             override fun onFailure(call: Call<AlbumComercioRespuesta>, t: Throwable) {
-                Log.e("ALBUM", "Error en la carga: ${t.message}")
+                // Error silenciado en release
             }
         })
     }
@@ -90,9 +85,8 @@ class AlbumComercioActivity : DrawerActivity() {
             val intent = Intent(this, ImagenCompletaActivity::class.java)
             intent.putExtra("pathImagen", file.absolutePath)
             startActivity(intent)
-        } catch (e: Exception) {
-            Log.e("ALBUM", "Error al abrir imagen completa: ${e.message}")
+        } catch (_: Exception) {
+            // Error silenciado en release
         }
     }
-
 }

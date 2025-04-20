@@ -1,8 +1,8 @@
 package com.example.ppt_munic.network
 
-import com.example.ppt_munic.data.Listado_Incidencias.ListadoIncidenciaRespuesta
-import com.example.ppt_munic.data.Productos.ProductosRespuesta
-import com.example.ppt_munic.data.Redes_Sociales.RedesRespuesta
+import com.example.ppt_munic.data.listado_Incidencias.ListadoIncidenciaRespuesta
+import com.example.ppt_munic.data.productos.ProductosRespuesta
+import com.example.ppt_munic.data.redes_Sociales.RedesRespuesta
 import com.example.ppt_munic.data.albumComercio.AlbumComercioRespuesta
 import com.example.ppt_munic.data.categoria.CategoriaRespuesta
 import com.example.ppt_munic.data.comercio.ComercioRespuesta

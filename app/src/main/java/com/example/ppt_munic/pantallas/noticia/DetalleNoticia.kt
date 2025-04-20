@@ -3,7 +3,6 @@ package com.example.ppt_munic.pantallas.noticia
 import android.content.Intent
 import android.os.Bundle
 import android.util.Base64
-import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
@@ -25,7 +24,6 @@ class DetalleNoticia : DrawerActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Log.d("DetalleNoticia", "✅ Activity lanzada")
         setContentView(R.layout.activity_detalle_noticia)
 
         // Vincular vistas
@@ -37,13 +35,9 @@ class DetalleNoticia : DrawerActivity() {
         tvFecha = findViewById(R.id.tvFecha)
 
         val id = intent.getIntExtra("id_noticia", -1)
-        Log.d("DetalleNoticia", "Recibido ID de noticia: $id")
-
         val noticia = NoticiaCache.cache[id]
 
         if (noticia != null) {
-            Log.d("DetalleNoticia", "Noticia encontrada en caché: ${noticia.titulo}")
-
             tvNombre.text = noticia.titulo
             tvDescripcion.text = noticia.contenido
             tvFecha.text = noticia.fecha_publicacion.take(10)
@@ -60,8 +54,6 @@ class DetalleNoticia : DrawerActivity() {
             }
 
             imgPreview.setOnClickListener {
-                Log.d("DetalleNoticia", "Imagen tocada, preparando vista completa...")
-
                 val imagenBase64 = noticia.imagen
                 if (!imagenBase64.isNullOrEmpty()) {
                     try {
@@ -73,21 +65,17 @@ class DetalleNoticia : DrawerActivity() {
                         val intent = Intent(this, com.example.ppt_munic.pantallas.albumComercio.ImagenCompletaActivity::class.java)
                         intent.putExtra("pathImagen", tempFile.absolutePath)
                         startActivity(intent)
-                    } catch (e: Exception) {
-                        Log.e("DetalleNoticia", "Error al convertir imagen base64: ${e.message}")
+                    } catch (_: Exception) {
+                        // Error silenciado
                     }
-                } else {
-                    Log.e("DetalleNoticia", "Imagen base64 vacía o nula")
                 }
             }
 
         } else {
-            Log.e("DetalleNoticia", "No se encontró la noticia en caché. Cerrando.")
             finish()
         }
 
         btnCerrar.setOnClickListener {
-            Log.d("DetalleNoticia", "Cierre manual de pantalla")
             finish()
         }
     }
@@ -95,7 +83,6 @@ class DetalleNoticia : DrawerActivity() {
     override fun onDestroy() {
         super.onDestroy()
         val id = intent.getIntExtra("id_noticia", -1)
-        Log.d("DetalleNoticia", "onDestroy → eliminando noticia ID $id del caché")
         NoticiaCache.cache.remove(id)
     }
 }

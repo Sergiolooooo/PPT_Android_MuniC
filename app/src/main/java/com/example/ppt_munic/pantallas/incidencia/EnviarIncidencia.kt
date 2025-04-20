@@ -1,6 +1,5 @@
 package com.example.ppt_munic.pantallas.incidencia
 
-import android.util.Log
 import com.example.ppt_munic.data.incidencia.IncidenciaRespuesta
 import com.example.ppt_munic.network.RetrofitClient
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -44,7 +43,6 @@ class EnviarIncidencia {
             else -> "image/jpeg" // por defecto si no se reconoce
         }
         val imagenRequest = imagenFile.asRequestBody(mimeType.toMediaTypeOrNull())
-
         val imagenPart = MultipartBody.Part.createFormData("imagen", imagenFile.name, imagenRequest)
 
         val call = apiService.postIncidencia(
@@ -73,13 +71,11 @@ class EnviarIncidencia {
                     }
                 } else {
                     val errorBody = response.errorBody()?.string()
-                    Log.e("API_ERROR", "Error ${response.code()} body: $errorBody")
                     onError("Error ${response.code()}: ${errorBody ?: "No se pudo procesar la solicitud"}")
                 }
             }
 
             override fun onFailure(call: Call<IncidenciaRespuesta>, t: Throwable) {
-                Log.e("API_ERROR", "Fallo de red: ${t.message}", t)
                 onError("Error de conexión: ${t.message ?: "Error desconocido"}")
             }
         })

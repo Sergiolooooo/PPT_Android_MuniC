@@ -3,7 +3,6 @@ package com.example.ppt_munic.pantallas.comercio
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
@@ -74,10 +73,8 @@ class ComerciosActivity : DrawerActivity() {
                         })
                     }
                 }
-            } catch (e: Exception) {
-                withContext(Dispatchers.Main) {
-                    Log.e("API_ERROR", "Error en la llamada: ${e.message}")
-                }
+            } catch (_: Exception) {
+                // Error silenciado en release
             }
         }
     }
