@@ -9,7 +9,7 @@ import android.widget.TextView
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ppt_munic.R
-import com.example.ppt_munic.data.redes_Sociales.RedesSocialesAdapter
+import com.example.ppt_munic.data.redes_sociales.RedesSocialesAdapter
 import com.example.ppt_munic.data.albumComercio.AlbumCache
 import com.example.ppt_munic.network.RetrofitClient
 import com.example.ppt_munic.pantallas.albumComercio.AlbumComercioActivity

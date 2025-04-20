@@ -55,23 +55,26 @@ class DetalleEvento : DrawerActivity() {
                     .placeholder(R.drawable.ic_default)
                     .error(R.drawable.ic_default)
                     .into(imgPreview)
+            } else {
+                imgPreview.setImageResource(R.drawable.ic_default)
+            }
 
-                imgPreview.setOnClickListener {
+            imgPreview.setOnClickListener {
+                val imagenBase64 = evento.imagen
+                if (!imagenBase64.isNullOrEmpty()) {
                     try {
-                        val base64 = evento.imagen.substringAfter(",")
-                        val imageBytes = Base64.decode(base64, Base64.DEFAULT)
-                        val tempFile = File.createTempFile("evento_", ".jpg", cacheDir)
+                        val base64Clean = imagenBase64.substringAfter(",")
+                        val imageBytes = Base64.decode(base64Clean, Base64.DEFAULT)
+                        val tempFile = File.createTempFile("imagen_evento_", ".jpg", cacheDir)
                         FileOutputStream(tempFile).use { it.write(imageBytes) }
 
                         val intent = Intent(this, ImagenCompletaActivity::class.java)
                         intent.putExtra("pathImagen", tempFile.absolutePath)
                         startActivity(intent)
                     } catch (_: Exception) {
-                        // Error silenciado en release
+                        // Error silencioso
                     }
                 }
-            } else {
-                imgPreview.setImageResource(R.drawable.ic_default)
             }
 
         } else {

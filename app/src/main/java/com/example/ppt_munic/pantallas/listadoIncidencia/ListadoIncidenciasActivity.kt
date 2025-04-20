@@ -11,8 +11,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.lifecycle.lifecycleScope
 import com.example.ppt_munic.R
-import com.example.ppt_munic.data.listado_Incidencias.ListadoIncidencia
-import com.example.ppt_munic.data.listado_Incidencias.ListadoIncidenciaAdapter
+import com.example.ppt_munic.data.listado_incidencias.ListadoIncidencia
+import com.example.ppt_munic.data.listado_incidencias.ListadoIncidenciaAdapter
 import com.example.ppt_munic.network.RetrofitClient
 import com.example.ppt_munic.pantallas.incidencia.IncidenciaActivity
 import com.example.ppt_munic.pantallas.menu.DrawerActivity

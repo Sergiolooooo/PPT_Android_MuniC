@@ -1,4 +1,4 @@
-package com.example.ppt_munic.data.redes_Sociales
+package com.example.ppt_munic.data.redes_sociales
 
 import android.content.Context
 import android.content.Intent
@@ -36,6 +36,7 @@ class RedesSocialesAdapter(
                 "x" -> holder.imgRedSocial.setImageResource(R.drawable.ic_twitter_x)
                 "instagram" -> holder.imgRedSocial.setImageResource(R.drawable.ic_instagram)
                 "whatsapp" -> holder.imgRedSocial.setImageResource(R.drawable.ic_whatsapp)
+                "tiktok" -> holder.imgRedSocial.setImageResource(R.drawable.ic_tiktok)
                 else -> holder.imgRedSocial.setImageResource(R.drawable.ic_default)
             }
 
