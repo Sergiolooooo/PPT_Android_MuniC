@@ -17,6 +17,7 @@ class EnviarIncidencia {
         nombre: String,
         cedula: Int,
         telefono: Int,
+        descripcion: String,
         idIncidencia: Int,
         provincia: String,
         canton: String,
@@ -31,6 +32,7 @@ class EnviarIncidencia {
         val nombreBody = nombre.toRequestBody("multipart/form-data".toMediaTypeOrNull())
         val cedulaBody = cedula.toString().toRequestBody("multipart/form-data".toMediaTypeOrNull())
         val telefonoBody = telefono.toString().toRequestBody("multipart/form-data".toMediaTypeOrNull())
+        val descripcionBody = descripcion.toRequestBody("multipart/form-data".toMediaTypeOrNull()) // ✅
         val idIncidenciaBody = idIncidencia.toString().toRequestBody("multipart/form-data".toMediaTypeOrNull())
         val provinciaBody = provincia.toRequestBody("multipart/form-data".toMediaTypeOrNull())
         val cantonBody = canton.toRequestBody("multipart/form-data".toMediaTypeOrNull())
@@ -40,7 +42,7 @@ class EnviarIncidencia {
         val mimeType = when (imagenFile.extension.lowercase()) {
             "jpg", "jpeg" -> "image/jpeg"
             "png" -> "image/png"
-            else -> "image/jpeg" // por defecto si no se reconoce
+            else -> "image/jpeg"
         }
         val imagenRequest = imagenFile.asRequestBody(mimeType.toMediaTypeOrNull())
         val imagenPart = MultipartBody.Part.createFormData("imagen", imagenFile.name, imagenRequest)
@@ -49,6 +51,7 @@ class EnviarIncidencia {
             nombreBody,
             cedulaBody,
             telefonoBody,
+            descripcionBody,
             idIncidenciaBody,
             provinciaBody,
             cantonBody,
@@ -58,10 +61,7 @@ class EnviarIncidencia {
         )
 
         call.enqueue(object : Callback<IncidenciaRespuesta> {
-            override fun onResponse(
-                call: Call<IncidenciaRespuesta>,
-                response: Response<IncidenciaRespuesta>
-            ) {
+            override fun onResponse(call: Call<IncidenciaRespuesta>, response: Response<IncidenciaRespuesta>) {
                 if (response.isSuccessful) {
                     val resp = response.body()
                     if (resp?.success == true) {

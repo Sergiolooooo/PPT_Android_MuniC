@@ -1,13 +1,11 @@
 package com.example.ppt_munic.pantallas.incidencia
 
 import android.app.AlertDialog
-import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
-import android.provider.MediaStore
 import android.provider.OpenableColumns
 import android.widget.*
 import androidx.activity.result.ActivityResultLauncher
@@ -26,6 +24,7 @@ class IncidenciaActivity : DrawerActivity() {
     private lateinit var etNombre: EditText
     private lateinit var etCedula: EditText
     private lateinit var etTelefono: EditText
+    private lateinit var etDescripcion: EditText
     private lateinit var etProvincia: EditText
     private lateinit var etCanton: EditText
     private lateinit var etDistrito: EditText
@@ -42,7 +41,6 @@ class IncidenciaActivity : DrawerActivity() {
 
     private var idIncidenciaRecibido: Int = -1
 
-    // Launchers
     private lateinit var galeriaLauncher: ActivityResultLauncher<String>
     private lateinit var camaraLauncher: ActivityResultLauncher<Uri>
 
@@ -50,10 +48,10 @@ class IncidenciaActivity : DrawerActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_enviar_incidencia)
 
-        // Inicializar vistas
         etNombre = findViewById(R.id.etNombre)
         etCedula = findViewById(R.id.etCedula)
         etTelefono = findViewById(R.id.etTelefono)
+        etDescripcion = findViewById(R.id.etDescripcion)
         etProvincia = findViewById(R.id.etProvincia)
         etCanton = findViewById(R.id.etCanton)
         etDistrito = findViewById(R.id.etDistrito)
@@ -63,11 +61,10 @@ class IncidenciaActivity : DrawerActivity() {
         imgPreview = findViewById(R.id.imgPreview)
         titulo = findViewById(R.id.titulo_incidencia)
         btnCerrar = findViewById(R.id.btn_cerrar)
-        // Establecer valores por defecto
+
         etProvincia.setText("Guanacaste")
         etCanton.setText("Cañas")
 
-        // Recuperar datos de la incidencia
         idIncidenciaRecibido = intent.getIntExtra("id_incidencia", -1)
         val nombreIncidencia = intent.getStringExtra("nombre_incidencia")
         titulo.text = nombreIncidencia ?: "Incidencia"
@@ -178,14 +175,15 @@ class IncidenciaActivity : DrawerActivity() {
         val nombre = etNombre.text.toString()
         val cedula = etCedula.text.toString().toIntOrNull()
         val telefono = etTelefono.text.toString().toIntOrNull()
+        val descripcion = etDescripcion.text.toString()
         val provincia = etProvincia.text.toString()
         val canton = etCanton.text.toString()
         val distrito = etDistrito.text.toString()
         val direccion = etDireccion.text.toString()
         val imagen = imagenSeleccionada
 
-        if (nombre.isBlank() || cedula == null || telefono == null ||
-            provincia.isBlank() || canton.isBlank() || distrito.isBlank() || direccion.isBlank() || imagen == null
+        if (nombre.isBlank() || cedula == null || telefono == null || descripcion.isBlank()
+            || provincia.isBlank() || canton.isBlank() || distrito.isBlank() || direccion.isBlank() || imagen == null
         ) {
             Toast.makeText(this, "Completa todos los campos y selecciona una imagen", Toast.LENGTH_LONG).show()
             return
@@ -195,11 +193,12 @@ class IncidenciaActivity : DrawerActivity() {
             nombre = nombre,
             cedula = cedula,
             telefono = telefono,
-            idIncidencia = idIncidenciaRecibido, // usamos el valor recibido
+            idIncidencia = idIncidenciaRecibido,
             provincia = provincia,
             canton = canton,
             distrito = distrito,
             direccion = direccion,
+            descripcion = descripcion,
             imagenFile = imagen,
             onSuccess = { mensaje ->
                 Toast.makeText(this, " $mensaje", Toast.LENGTH_LONG).show()

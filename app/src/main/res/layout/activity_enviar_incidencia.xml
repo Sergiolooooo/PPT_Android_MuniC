@@ -115,6 +115,15 @@
                     android:background="@drawable/bg_input" />
 
                 <EditText
+                    android:id="@+id/etDescripcion"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Descripción de la incidencia"
+                    android:textColor="@color/marron_texto"
+                    android:layout_marginTop="2dp"
+                    android:background="@drawable/bg_input" />
+
+                <EditText
                     android:id="@+id/etProvincia"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

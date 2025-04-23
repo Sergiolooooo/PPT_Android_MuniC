@@ -43,6 +43,7 @@ interface ApiService {
         @Part("nombre_reportante") nombreReportante: RequestBody,
         @Part("cedula_reportante") cedulaReportante: RequestBody,
         @Part("telefono_reportante") telefonoReportante: RequestBody,
+        @Part("descripcion_incidencia") descripcionIncidencia: RequestBody,
         @Part("id_incidencia") idIncidencia: RequestBody,
         @Part("provincia") provincia: RequestBody,
         @Part("canton") canton: RequestBody,
